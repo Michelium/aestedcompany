@@ -31,7 +31,8 @@
         "symfony/symfony": "3.4.*",
         "symfony/templating": "^3.4",
         "twig/twig": "^1.0||^2.0",
-        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
+        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3",
+        "symfony/maker-bundle": "^1.11"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^3.0"
