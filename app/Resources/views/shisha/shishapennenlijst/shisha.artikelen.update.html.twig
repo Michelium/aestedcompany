@@ -1,0 +1,16 @@
+{% extends 'shisha/shisha.layout.html.twig' %}
+
+{% block title %}Shisha | Artikelen updaten{% endblock %}
+{% block active0 %}active{% endblock %}
+
+{% block body %}
+  <h5>Shisha pen updaten:</h5>
+  {{ form_start(updateProductForm)}}
+  {#{{ form_row(updateProductForm.categorie) }}#}
+  {{ form_row(updateProductForm.inkoopprijs) }}
+  {{ form_row(updateProductForm.gewicht) }}
+  {{ form_row(updateProductForm.adviesprijs) }}
+  {{ form_row(updateProductForm.minimaleVoorraad) }}
+  <a class="btn btn-danger btn-sm mb-5" href="{{ path('shishaArtikelen') }}"><i class="fas fa-arrow-left"></i> Terug</a>
+  <button type="submit" class="btn btn-primary btn-sm mb-5"><i class="fas fa-pen"></i> Updaten</button>
+{% endblock %}

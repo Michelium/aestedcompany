@@ -1,0 +1,52 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Artikelen | Artikel {% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Artikel</h5>
+
+        <table class="table table-borderless table-hover">
+          <tr>
+            <th>Artikel:</th>
+            <td>{{ artikel.naam }}</td>
+          </tr>
+          <tr>
+            <th>Categorie:</th>
+            <td>{{ artikel.categorie }}</td>
+          </tr>
+          <tr>
+            <th>Inkoopprijs:</th>
+            <td>{% if artikel.inkoopprijs %}€ {{ artikel.inkoopprijs|number_format(2, ',', '.') }}{% else %}<span class="badge badge-danger">Niet ingevuld</span>{% endif %}</td>
+          </tr>
+          <tr>
+            <th>Minimale verkoopprijs:</th>
+            <td>{% if artikel.minimaleVerkoopprijs %}€ {{ artikel.minimaleVerkoopprijs|number_format(2, ',', '.') }}{% else %}<span class="badge badge-danger">Niet ingevuld</span>{% endif %}</td>
+          </tr>
+          <tr>
+            <th>Gewicht:</th>
+            <td>{% if artikel.gewicht %} {{ artikel.gewicht }} gram{% else %}<span class="badge badge-danger">Niet ingevuld</span>{% endif %}</td>
+          </tr>
+          <tr>
+            <th>Adviesprijs:</th>
+            <td>{% if artikel.adviesprijs %}€ {{ artikel.adviesprijs|number_format(2, ',', '.') }}{% else %}<span class="badge badge-danger">Niet ingevuld</span>{% endif %}</td>
+          </tr>
+          <tr>
+            <th>Minimale voorraad:</th>
+            <td>{% if artikel.minimaleVoorraad %} {{ artikel.minimaleVoorraad }} {% else %}<span class="badge badge-danger">Niet ingevuld</span>{% endif %}</td>
+          </tr>
+        </table>
+
+        <form action="{{ path('artikelen_artikelenUpdate', {'id': artikel.id}) }}">
+          <button type="button" class="btn btn-danger btn-sm" onclick="window.history.back()"><i class="fas fa-arrow-left"></i> Terug</button>
+          <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> Updaten</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

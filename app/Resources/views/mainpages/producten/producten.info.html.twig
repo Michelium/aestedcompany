@@ -1,0 +1,45 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Producten | Product info{% endblock %}
+{% block active0 %}active{% endblock %}
+
+{% block body %}
+  <h5>Product informatie:</h5>
+  {#<p><span class="badge badge-warning">WAARSCHUWING</span> Dit product wordt NIET aan de voorraad toegevoegd, maar moet eerst bestelt worden! </p>#}
+
+  <table class="table table-sm table-striped table-hover table-responsive-lg" id="myTable1">
+    <tbody id="myTable">
+    <tr>
+      <th> Categorie:</th>
+      <td> {{ product.categorie }}</td>
+    </tr>
+    <tr>
+      <th> Product:</th>
+      <td> {{ product.productnaam }}</td>
+    </tr>
+    <tr>
+      <th> Minimale voorraad:</th>
+      <td> {{ product.minimaleVoorraad }}</td>
+    </tr>
+    <tr>
+      <th> Gewicht per product:</th>
+      <td> {{ product.gewicht }} gram</td>
+    </tr>
+    <tr>
+      <th> Inkoopprijs:</th>
+      <td>€ {{ product.inkoopprijs|number_format(2, ',', '.') }}</td>
+    </tr>
+    <tr>
+      <th> Adviesprijs:</th>
+      <td>€ {{ product.adviesprijs|number_format(2, ',', '.') }}</td>
+    </tr>
+    <tr>
+      <th> Minimale verkoopprijs per product:</th>
+      <td>€ {{ product.minimaleVerkoopprijs|number_format(2, ',', '.') }}</td>
+    </tr>
+
+    </tbody>
+  </table>
+
+  <a class="btn btn-danger btn-sm mb-5" href="{{ path('producten') }}"><i class="fas fa-arrow-left"></i> Terug</a>
+{% endblock %}

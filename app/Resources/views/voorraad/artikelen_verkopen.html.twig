@@ -1,0 +1,116 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Voorraad | Artikelen verkopen {% endblock %}
+
+{% block content %}
+
+  {#Laat eventuele errors zien op de pagina#}
+  {% for msg in app.session.flashBag.get('error') %}
+    <div class="alert alert-danger alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>ERROR!</strong> {{ msg }}
+    </div>
+  {% endfor %}
+
+  {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Koper en verzend informatie:</h5>
+        {{ form_row(form.koper) }}
+        {% if is_granted('ROLE_USER') %}
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              {{ form_row(form.postcode) }}
+            </div>
+            <div class="col-md-3 col-sm-12">
+              {{ form_row(form.huisnummer) }}
+            </div>
+            <div class="col-md-3 col-sm-12">
+              {{ form_row(form.toevoegsel) }}
+            </div>
+          </div>
+          {{ form_row(form.typeEnv) }}
+          {{ form_row(form.marktplaatsaccount) }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Artikelen:</h5>
+        <div class="row">
+          <div class="col-lg-4 col-sm-10">
+            {{ form_row(form.artikel1) }}
+          </div>
+          <div class="col-lg-2 col-sm-2">
+            {{ form_row (form.artikel1Aantal) }}
+          </div>
+          <div class="col-lg-4 col-sm-10">
+            {{ form_row(form.artikel2) }}
+          </div>
+          <div class="col-lg-2 col-sm-2">
+            {{ form_row (form.artikel2Aantal) }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-sm-10">
+            {{ form_row(form.artikel3) }}
+          </div>
+          <div class="col-lg-2 col-sm-2">
+            {{ form_row (form.artikel3Aantal) }}
+          </div>
+          <div class="col-lg-4 col-sm-10">
+            {{ form_row(form.artikel4) }}
+          </div>
+          <div class="col-lg-2 col-sm-2">
+            {{ form_row (form.artikel4Aantal) }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-sm-10">
+            {{ form_row(form.artikel5) }}
+          </div>
+          <div class="col-lg-2 col-sm-2">
+            {{ form_row (form.artikel5Aantal) }}
+          </div>
+          <div class="col-lg-4 col-sm-10">
+            {{ form_row(form.artikel6) }}
+          </div>
+          <div class="col-lg-2 col-sm-2">
+            {{ form_row (form.artikel6Aantal) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Betalingsinformatie:</h5>
+        {{ form_row(form.betaalmethode) }}
+        {{ form_row(form.verkoopprijs) }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Overige informatie:</h5>
+        {{ form_row(form.verkocht) }}
+        {{ form_row(form.extraInfo) }}
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-sm my-2"><i class="fas fa-shopping-cart"></i> Verkopen</button>
+
+  {# Token CSRF #}
+  {{ form_widget(form._token) }}
+  {{ form_end(form, {'render_rest': false}) }}
+
+{% endblock %}

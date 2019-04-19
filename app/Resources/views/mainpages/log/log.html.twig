@@ -1,0 +1,75 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Log{% endblock %}
+{% block active4 %}active{% endblock %}
+{% block username %} {{ user.username }} {% endblock %}
+
+{% block body %}
+  <script>
+      $(document).ready(function () {
+          $("#myInput").on("keyup", function () {
+              var value = $(this).val().toLowerCase();
+              $("#myTable tr").filter(function () {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+              });
+          });
+      });
+
+      $(document).ready(function () {
+          $('.table').DataTable({
+              "paging": true,
+              "info": true,
+              "searching": true,
+              "pageLength": 50,
+              "order": [[0, 'DESC']],
+              "columnDefs": [
+                  {"orderable": false, "targets": [6, 0]}
+              ]
+          });
+      });
+  </script>
+
+  {% for msg in app.session.flashBag.get('error') %}
+    <div class="alert alert-danger alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>ERROR!</strong> {{ msg }}
+    </div>
+  {% endfor %}
+
+  <h5>Lijst van alle orders:</h5>
+  {#<input class="form-control my-2" id="myInput" type="text" placeholder="Zoeken..">#}
+  <table class="table table-sm table-hover table-responsive-lg">
+    <thead>
+    <tr>
+      <th style="width: 3%">Ordernummer</th>
+      <th style="width: 10%">Koper</th>
+      <th style="width: 10%">Datum</th>
+      <th style="width: 7%">Verkoopprijs</th>
+      <th style="width: 7%">Marktplaats acc.</th>
+      <th style="width: 1%">Verzonden</th>
+      <th style="width: 1%">Paid</th>
+      <th style="width: 1%">Sold</th>
+      <th style="width: 2%">Acties</th>
+    </tr>
+    </thead>
+    <tbody id="myTable1">
+    {% for order in orders %}
+      <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.koper }}</td>
+        <td>{{ order.verkoopdatum|date("d-m-Y") }}</td>
+        <td>€ {{ order.verkoopprijs|number_format(2,',','.') }}</td>
+        <td>{{ order.marktplaatsaccount }}</td>
+        <td>{% if order.verzonden == 1 %} <i class="fas fa-check text-success"></i> {% else %} <i class="fas fa-times text-danger"></i> {% endif %}</td>
+        <td>{% if order.betaald == 1 %} <i class="fas fa-check text-success"></i> {% else %} <i class="fas fa-times text-danger"></i> {% endif %}</td>
+        <td>{% if order.verkocht == 1 %} <i class="fas fa-check text-success"></i> {% else %} <i class="fas fa-times text-danger"></i> {% endif %}</td>
+        <td>
+          <a class="btn btn-primary btn-sm mr-2" href="{{ path('logdetail', {'id': order.id}) }}"><i
+                    class="fas fa-info"></i>&nbsp;Info</a>
+        </td>
+
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

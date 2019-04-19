@@ -1,0 +1,17 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Bestelling toevoegen{% endblock %}
+{% block active3 %}active{% endblock %}
+{% block username %} {{ user.username }} {% endblock %}
+
+{% block body %}
+  <h5>Bestelling invoeren:</h5>
+  <p><span class="badge badge-warning">WAARSCHUWING</span> <i>Inkoopprijs</i> is de <strong>TOTALE</strong> prijs van de
+    bestelling! </p>
+  {{ form_start(addBestellingForm) }}
+  {{ form_widget(addBestellingForm) }}
+
+  <a class="btn btn-danger btn-sm mb-5" href="{{ path('bestellingen') }}"><i class="fas fa-arrow-left"></i> Terug</a>
+  <button type="submit" class="btn btn-primary btn-sm mb-5"><i class="fas fa-plus"></i> Toevoegen</button>
+  {{ form_end(addBestellingForm) }}
+{% endblock %}

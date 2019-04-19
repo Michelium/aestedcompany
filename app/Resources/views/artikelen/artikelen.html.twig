@@ -1,0 +1,202 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Artikelen | Artikelenlijst {% endblock %}
+
+{% block content %}
+
+  {#SHISHA MODE OFF#}
+  {% if app.session.get('mode') == 'default' %}
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="row my-2">
+            <h5 class="ml-3">Artikelen:</h5>
+            <a class="btn btn-success btn-sm ml-auto mr-3" href="{{ path('artikelen_artikelenCreate') }}"><i class="fas fa-plus"></i> Artikel toevoegen</a>
+          </div>
+          <a class="btn btn-dark btn-block my-2" onclick="this.blur();" data-toggle="collapse" href="#artikelen0"
+             role="button" aria-expanded="false" aria-controls="artikelen0">
+            <h5 class="">Specials</h5>
+          </a>
+          <div class="collapse show my-2" id="artikelen0">
+            <table class="table table-hover table-sm table-responsive-md">
+              <thead>
+              <tr>
+                <th style="width: 30%">Categorie</th>
+                <th style="width: 50%">Naam</th>
+                <th style="width: 8%; min-width: 200px;">Acties</th>
+                <th style="width: 5%">Populariteit</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for artikel in artikelen0 %}
+                <tr>
+                  <td>{{ artikel.categorie }}</td>
+                  <td>{{ artikel.naam }}</td>
+
+                  <td>
+                    <a class="btn btn-warning btn-sm mx-1"
+                       href="{{ path('artikelen_artikelenUpdate', {'id': artikel.id}) }}"><i
+                              class="fas fa-pen"></i> Update</a>
+                    <a class="btn btn-primary btn-sm mx-1"
+                       href="{{ path('artikelen_artikelenShow', {'id': artikel.id}) }}"><i
+                              class="fas fa-eye"></i> Show</a>
+                  </td>
+                  <td>
+                    <a class="btn btn-secondary btn-sm disabled" href=""><i class="fas fa-angle-up"></i></a>
+                    <a class="disabled btn btn-secondary btn-sm"
+                       href="{{ path('productenMovePop', {'dir' : 'down', 'id': artikel.id}) }}"><i
+                              class="fas fa-angle-down"></i></a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <a class="btn btn-dark btn-block my-2" onclick="this.blur();" data-toggle="collapse" href="#artikelen1"
+             role="button" aria-expanded="false" aria-controls="artikelen1">
+            <h5 class="">Actieve verkoop</h5>
+          </a>
+          <div class="collapse my-2" id="artikelen1">
+            <table class="table table-hover table-sm ">
+              <thead>
+              <tr>
+                <th style="width: 40%">Categorie</th>
+                <th style="width: 30%">Naam</th>
+                <th style="width: 10%">Inkoopprijs</th>
+                <th style="width: 8%; min-width: 200px;">Acties</th>
+                <th style="width: 5%">Populariteit</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for artikel in artikelen1 %}
+                <tr>
+                  <td>{{ artikel.categorie }}</td>
+                  <td>{{ artikel.naam }}</td>
+                  <td>
+            <span class="badge badge-pill {% if ((artikel.inkoopprijs != 0) or (artikel.inkoopprijs != null)) and ((artikel.gewicht != null) or (artikel.gewicht != 0)) %} badge-success {% else %} badge-danger {% endif %} ">
+              {% if ((artikel.inkoopprijs != 0) or (artikel.inkoopprijs != null)) and ((artikel.gewicht != null) or (artikel.gewicht != 0)) %} Ingevuld {% else %} Niet ingevuld {% endif %}
+            </span>
+                  </td>
+
+                  <td>
+                    <a class="btn btn-warning btn-sm mx-1"
+                       href="{{ path('artikelen_artikelenUpdate', {'id': artikel.id}) }}"><i
+                              class="fas fa-pen"></i> Update</a>
+                    <a class="btn btn-primary btn-sm mx-1"
+                       href="{{ path('artikelen_artikelenShow', {'id': artikel.id}) }}"><i
+                              class="fas fa-info"></i> Info</a>
+                  </td>
+                  <td>
+                    <a class="btn btn-secondary btn-sm disabled" href=""><i class="fas fa-angle-up"></i></a>
+                    <a class="disabled btn btn-secondary btn-sm"
+                       href="{{ path('productenMovePop', {'dir' : 'down', 'id': artikel.id}) }}"><i
+                              class="fas fa-angle-down"></i></a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <a class="btn btn-dark btn-block my-2" onclick="this.blur();" data-toggle="collapse" href="#artikelen2"
+             role="button" aria-expanded="false" aria-controls="artikelen2">
+            <h5 class="">Blacklist</h5>
+          </a>
+          <div class="collapse my-2" id="artikelen2">
+            <table class="table table-hover table-sm ">
+              <thead>
+              <tr>
+                <th style="width: 40%">Categorie</th>
+                <th style="width: 30%">Naam</th>
+                <th style="width: 10%">Inkoopprijs</th>
+                <th style="width: 8%; min-width: 200px;">Acties</th>
+                <th style="width: 5%">Populariteit</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for artikel in artikelen2 %}
+                <tr>
+                  <td>{{ artikel.categorie }}</td>
+                  <td>{{ artikel.naam }}</td>
+                  <td>
+            <span class="badge badge-pill {% if ((artikel.inkoopprijs != 0) or (artikel.inkoopprijs != null)) and ((artikel.gewicht != null) or (artikel.gewicht != 0)) %} badge-success {% else %} badge-danger {% endif %} ">
+              {% if ((artikel.inkoopprijs != 0) or (artikel.inkoopprijs != null)) and ((artikel.gewicht != null) or (artikel.gewicht != 0)) %} Ingevuld {% else %} Niet ingevuld {% endif %}
+            </span>
+                  </td>
+
+                  <td>
+                    <a class="btn btn-warning btn-sm mx-1"
+                       href="{{ path('artikelen_artikelenUpdate', {'id': artikel.id}) }}"><i
+                              class="fas fa-pen"></i> Update</a>
+                    <a class="btn btn-primary btn-sm mx-1"
+                       href="{{ path('artikelen_artikelenShow', {'id': artikel.id}) }}"><i
+                              class="fas fa-info"></i> Info</a>
+                  </td>
+                  <td>
+                    <a class="btn btn-secondary btn-sm disabled" href=""><i class="fas fa-angle-up"></i></a>
+                    <a class="disabled btn btn-secondary btn-sm"
+                       href="{{ path('productenMovePop', {'dir' : 'down', 'id': artikel.id}) }}"><i
+                              class="fas fa-angle-down"></i></a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {#SHISHA MODE ON#}
+  {% elseif app.session.get('mode') == 'shisha' %}
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="row my-2">
+            <h5 class="ml-3">Artikelen:</h5>
+            <a class="btn btn-success btn-sm ml-auto mr-3" href="{{ path('artikelen_artikelenCreate') }}"><i class="fas fa-plus"></i> Artikel toevoegen</a>
+          </div>
+          <table class="table table-hover table-sm ">
+            <thead>
+            <tr>
+              <th style="width: 70%">Smaak</th>
+              <th style="width: 10%">Inkoopprijs</th>
+              <th style="width: 8%; min-width: 200px;">Acties</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for artikel in artikelen %}
+              <tr>
+                <td>{{ artikel.naam }}</td>
+                <td>€ {{ artikel.inkoopprijs|number_format(2, ',', '.') }}</td>
+
+                <td>
+                  <a class="btn btn-warning btn-sm mx-1"
+                     href="{{ path('artikelen_artikelenUpdate', {'id': artikel.id}) }}"><i
+                            class="fas fa-pen"></i> Update</a>
+                  <a class="btn btn-primary btn-sm mx-1"
+                     href="{{ path('artikelen_artikelenShow', {'id': artikel.id}) }}"><i
+                            class="fas fa-info"></i> Info</a>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

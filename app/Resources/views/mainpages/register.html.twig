@@ -1,0 +1,14 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Registreren{% endblock %}
+{% block username %} {{ user.username }} {% endblock %}
+
+{% block body %}
+  {{ form_start(form) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.password.first) }}
+    {{ form_row(form.password.second) }}
+
+    <button class="btn btn-success">Registreer gebruiker!</button>
+  {{ form_end(form) }}
+{% endblock %}

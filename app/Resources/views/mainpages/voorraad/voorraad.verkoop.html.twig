@@ -1,0 +1,78 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Voorraad{% endblock %}
+{% block active1 %}active{% endblock %}
+{% block username %} {{ user.username }} {% endblock %}
+
+{% block body %}
+  <h5>Product verkopen:</h5>
+  <p><span class="badge badge-warning">WAARSCHUWING</span> <i>Verkoopprijs</i> is de <strong>TOTALE</strong> prijs van de verkoop!!! </p>
+  {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+  {{ form_row(form.koper) }}
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      {{ form_row(form.postcode) }}
+    </div>
+    <div class="col-md-3 col-sm-12">
+      {{ form_row(form.huisnummer) }}
+    </div>
+    <div class="col-md-3 col-sm-12">
+      {{ form_row(form.toevoegsel) }}
+    </div>
+  </div>
+  {{ form_row(form.betaalmethode) }}
+  {{ form_row(form.verkoopprijs) }}
+  {{ form_row(form.aantalproducten) }}
+  {{ form_row(form.verkocht) }}
+  <div class="form-group">
+    <label for="typeEnv">Type enveloppe</label>
+    <select class="form-control" name="typeEnv" id="typeEnv">
+      <option value="3">Standaard deluxe enveloppe</option>
+      <option value="5">Bubbeltjes enveloppe klein</option>
+      <option value="8">Bubbeltjes enveloppe groot</option>
+      <option value="0">Geen enveloppe en postzegel (0 gram)</option>
+    </select>
+  </div>
+
+  {{ form_row(form.marktplaatsaccount) }}
+
+  <button class="btn btn-sm btn-secondary mb-1 form-control" type="button" onclick="hideVerzendkosten(); this.blur();">Verzendkosten</button><br>
+  <div class="form-group d-none" id="verzendkosten">
+    {{ form_row(form.verzendkosten) }}
+  </div>
+
+  <button class="btn btn-sm btn-secondary mb-1 form-control" type="button" onclick="hideExtrainfo(); this.blur();">Extra info</button>
+  <div class="form-group d-none" id="extrainfo">
+    {{ form_row(form.extraInfo) }}
+  </div>
+
+  <a class="btn btn-danger btn-sm mb-5" href="{{ path('voorraad') }}"><i class="fas fa-arrow-left"></i> Terug</a>
+  <button type="submit" class="btn btn-primary btn-sm mb-5"><i class="fas fa-pen"></i> Verkopen</button>
+  {# Token CSRF #}
+  {{ form_widget(form._token) }}
+  {{ form_end(form, {'render_rest': false}) }}
+
+  <script>
+    var verzendkosten = document.getElementById('verzendkosten');
+    function hideVerzendkosten() {
+        if (verzendkosten.classList.contains("d-none")) {
+            verzendkosten.classList.add("d-block");
+            verzendkosten.classList.remove("d-none");
+        } else {
+            verzendkosten.classList.remove("d-block");
+            verzendkosten.classList.add("d-none");
+        }
+    }
+
+    var extrainfo = document.getElementById('extrainfo');
+    function hideExtrainfo() {
+        if (extrainfo.classList.contains("d-none")) {
+            extrainfo.classList.add("d-block");
+            extrainfo.classList.remove("d-none");
+        } else {
+            extrainfo.classList.remove("d-block");
+            extrainfo.classList.add("d-none");
+        }
+    }
+  </script>
+{% endblock %}

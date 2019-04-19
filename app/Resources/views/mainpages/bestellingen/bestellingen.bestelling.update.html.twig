@@ -1,0 +1,14 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Bestelling veranderen{% endblock %}
+{% block active3 %}active{% endblock %}
+{% block username %} {{ app.user.username }} {% endblock %}
+
+{% block body %}
+  <h5>Bestelling veranderen:</h5>
+  {{ form_start(form) }}
+  {{ form_widget(form) }}
+  <a class="btn btn-danger btn-sm mb-5" href="{{ path('bestellingen') }}"><i class="fas fa-arrow-left"></i> Terug</a>
+  <button type="submit" class="btn btn-primary btn-sm mb-5"><i class="fas fa-pen"></i> Veranderen</button>
+  {{ form_end(form) }}
+{% endblock %}

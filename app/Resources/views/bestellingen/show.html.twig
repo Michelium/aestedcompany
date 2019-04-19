@@ -1,0 +1,83 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Bestellingen | Bestelling {% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Bestelling (ID: {{ bestelling.id }})</h5>
+
+        <table class="table table-borderless table-hover">
+          <tr>
+            <th>Bestelling ID:</th>
+            <td>{{ bestelling.id }}</td>
+          </tr>
+          {% if app.session.get('mode') == 'default' %}
+            <tr>
+              <th>Artikel:</th>
+              <td>
+                {% if bestelling.customName == false %}
+                  {{ bestelling.artikel.naam }}
+                {% elseif bestelling.customName == true %}
+                  {{ bestelling.naam }}
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <th>Categorie:</th>
+              <td>
+                {% if bestelling.customName == false %}
+                  {{ bestelling.artikel.categorie }}
+                {% elseif bestelling.customName == true %}
+                  <span class="badge badge-danger">Niet beschikbaar</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% elseif app.session.get('mode') == 'shisha' %}
+            <tr>
+              <th>Smaak:</th>
+              <td>{{ bestelling.artikel.naam }}</td>
+            </tr>
+          {% endif %}
+          <tr>
+            <th>Aantal:</th>
+            <td>{{ bestelling.aantal }}</td>
+          </tr>
+          <tr>
+            <th>Bedrag:</th>
+            <td>€ {{ bestelling.bedrag|number_format(2, ',', '.') }}</td>
+          </tr>
+          <tr>
+            <th>Korting:</th>
+            <td>{{ bestelling.korting }} %</td>
+          </tr>
+          <tr>
+            <th>Besteldatum:</th>
+            <td>{{ bestelling.datum|date('d-m-Y') }}</td>
+          </tr>
+          <tr>
+            <th>Ontvangstdatum:</th>
+            <td>
+              {% if bestelling.ontvangen %}
+                {{ bestelling.ontvangstdatum|date('d-m-Y') }}
+              {% elseif bestelling.ontvangen == false %}
+                <span class="badge badge-danger">Niet ontvangen</span>
+              {% endif %}
+            </td>
+          </tr>
+        </table>
+
+        <form action="{{ path('bestellingen_update', {'id': bestelling.id}) }}">
+          <button type="button" class="btn btn-danger btn-sm" onclick="window.history.back()"><i
+                    class="fas fa-arrow-left"></i> Terug
+          </button>
+          <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> Updaten</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

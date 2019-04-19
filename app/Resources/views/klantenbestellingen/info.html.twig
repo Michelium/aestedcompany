@@ -1,0 +1,142 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Klantenbestellingen | Info {% endblock %}
+
+{% block content %}
+
+  <style>
+    .row > .col-lg-6 > .card > .row {
+      margin-bottom: 10px;
+    }
+  </style>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <div class="card">
+        <h5>Klantenbestelling gegevens:</h5>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Ordernummer:</strong></div>
+          <div class="col-lg-8">{{ klantenbestelling.id }}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Datum:</strong></div>
+          <div class="col-lg-9">{{ klantenbestelling.verkoopDatum|date("d-m-Y") }}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Marktplaats acc.:</strong></div>
+          <div class="col-lg-9">{{ klantenbestelling.marktplaatsaccount }}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Betaalmethode:</strong></div>
+          <div class="col-lg-9">{{ klantenbestelling.betaalmethode }}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Betaald:</strong></div>
+          <div class="col-lg-9">
+            {% if klantenbestelling.betaald == 1 %} Ja {% else %}
+              <a href="" class="btn btn-sm btn-light">Betaling ontvangen</a> {% endif %}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Verzonden:</strong></div>
+          <div class="col-lg-9">
+            {% if klantenbestelling.verzonden == 1 %} Ja {% else %}
+              <a href="" class="btn btn-sm btn-light">Verzonden</a> {% endif %}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Leverdatum:</strong></div>
+          <div class="col-lg-9">
+            {% if klantenbestelling.verzonden == 1 %}
+              {{ klantenbestelling.verwachteLeverdatum|date("d-m-Y") }}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Verkocht:</strong></div>
+          <div class="col-lg-9">{% if klantenbestelling.verkocht == 1 %} Ja {% else %} Nee {% endif %}</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+      <div class="card">
+        <h5>Verzendgegevens:</h5>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Koper:</strong></div>
+          <div class="col-lg-8">{{ klantenbestelling.koper }}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Adres:</strong></div>
+          <div class="col-lg-9">{{ klantenbestelling.adres }}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Postcode:</strong></div>
+          <div class="col-lg-9">{{ klantenbestelling.postcode }}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Stad:</strong></div>
+          <div class="col-lg-9">{{ klantenbestelling.stad }}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3"><strong>Aantal postzegels:</strong></div>
+          <div class="col-lg-9">{{ klantenbestelling.postzegels }}</div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Artikelen:</h5>
+
+        <table class="table table-sm table-hover table-responsive-lg">
+          <thead>
+          <tr>
+            <th>Artikel ID</th>
+            <th>Categorie</th>
+            <th>Naam</th>
+            <th>Aantal</th>
+            <th>Gewicht</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for key,klantenbestellingArtikel in klantenbestellingArtikelen %}
+            <tr>
+              <td>{{ klantenbestellingArtikel.artikel.id }}</td>
+              <td>{{ klantenbestellingArtikel.artikel.categorie }}</td>
+              <td>{{ klantenbestellingArtikel.artikel.naam }}</td>
+              <td>{{ klantenbestellingArtikel.aantal }}</td>
+              <td>{{ klantenbestellingArtikel.artikel.gewicht * klantenbestellingArtikel.aantal }} gram</td>
+            </tr>
+            {% if loop.last %}
+              <tr>
+                <td></td><td></td><td></td><td>Totaal gewicht:</td><td>{{ klantenbestelling.totaalgewicht }} gram</td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

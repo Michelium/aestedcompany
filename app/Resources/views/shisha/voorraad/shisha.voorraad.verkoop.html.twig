@@ -1,0 +1,115 @@
+{% extends 'shisha/shisha.layout.html.twig' %}
+
+{% block title %}Voorraad | Producten verkopen{% endblock %}
+{% block active1 %}active{% endblock %}
+
+{% block body %}
+  <h5>Shisha pennen verkopen:</h5>
+
+  {#Laat eventuele errors zien op de pagina#}
+  {% for msg in app.session.flashBag.get('error') %}
+    <div class="alert alert-danger alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>ERROR!</strong> {{ msg }}
+    </div>
+  {% endfor %}
+
+  {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+  <div class="card my-2">
+    <div class="card-header">Koper en verzend informatie:</div>
+    <div class="card-body">
+
+      {{ form_row(form.koper) }}
+      {% if is_granted('ROLE_SHISHA_ADMIN') %}
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            {{ form_row(form.postcode) }}
+          </div>
+          <div class="col-md-3 col-sm-12">
+            {{ form_row(form.huisnummer) }}
+          </div>
+          <div class="col-md-3 col-sm-12">
+            {{ form_row(form.toevoegsel) }}
+          </div>
+        </div>
+        {{ form_row(form.typeEnv) }}
+      {% endif %}
+
+    </div>
+  </div>
+
+  <div class="card my-2">
+    <div class="card-header">Producten:</div>
+    <div class="card-body">
+
+      <div class="row">
+        <div class="col-lg-4 col-sm-10">
+          {{ form_row(form.product1) }}
+        </div>
+        <div class="col-lg-2 col-sm-2">
+          {{ form_row (form.product1Aantal) }}
+        </div>
+        <div class="col-lg-4 col-sm-10">
+          {{ form_row(form.product2) }}
+        </div>
+        <div class="col-lg-2 col-sm-2">
+          {{ form_row (form.product2Aantal) }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-10">
+          {{ form_row(form.product3) }}
+        </div>
+        <div class="col-lg-2 col-sm-2">
+          {{ form_row (form.product3Aantal) }}
+        </div>
+        <div class="col-lg-4 col-sm-10">
+          {{ form_row(form.product4) }}
+        </div>
+        <div class="col-lg-2 col-sm-2">
+          {{ form_row (form.product4Aantal) }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-10">
+          {{ form_row(form.product5) }}
+        </div>
+        <div class="col-lg-2 col-sm-2">
+          {{ form_row (form.product5Aantal) }}
+        </div>
+        <div class="col-lg-4 col-sm-10">
+          {{ form_row(form.product6) }}
+        </div>
+        <div class="col-lg-2 col-sm-2">
+          {{ form_row (form.product6Aantal) }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card my-2">
+    <div class="card-header">Betalingsinformatie:</div>
+    <div class="card-body">
+      {{ form_row(form.betaalmethode) }}
+      {{ form_row(form.verkoopprijs) }}
+      {{ form_row(form.verkocht) }}
+    </div>
+  </div>
+
+  <div class="card my-2">
+    <div class="card-header">Overig:</div>
+    <div class="card-body">
+      {{ form_row(form.extraInfo) }}
+      {{ form_row(form.marktplaatsaccount) }}
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-sm mb-5"><i class="fas fa-pen"></i> Verkopen</button>
+
+
+
+  {# Token CSRF #}
+  {{ form_widget(form._token) }}
+  {{ form_end(form, {'render_rest': false}) }}
+
+{% endblock %}

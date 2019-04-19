@@ -1,0 +1,97 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Voorraad | Producten verkopen{% endblock %}
+{% block active1 %}active{% endblock %}
+
+{% block body %}
+  <h5>Producten verkopen:</h5>
+  <p><span class="badge badge-warning">WAARSCHUWING</span> -- </p>
+
+  {#Laat eventuele errors zien op de pagina#}
+  {% for msg in app.session.flashBag.get('error') %}
+    <div class="alert alert-danger alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>ERROR!</strong> {{ msg }}
+    </div>
+  {% endfor %}
+
+  {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+  {{ form_row(form.koper) }}
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      {{ form_row(form.postcode) }}
+    </div>
+    <div class="col-md-3 col-sm-12">
+      {{ form_row(form.huisnummer) }}
+    </div>
+    <div class="col-md-3 col-sm-12">
+      {{ form_row(form.toevoegsel) }}
+    </div>
+  </div>
+  {{ form_row(form.betaalmethode) }}
+  {{ form_row(form.verkoopprijs) }}
+  {{ form_row(form.verkocht) }}
+  {{ form_row(form.extraInfo) }}
+
+
+  <div class="form-group">
+    <label for="product1">Product 1</label>
+    <select class="form-control" name="product1" id="product1">
+      <option value="0">-</option>
+      {% for product in producten %}
+        <option value="{{ product.id }}">{{ product.categorie }} >>> {{ product.productnaam }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="product1aantal">Product 1 aantal</label>
+    <input id="product1aantal" type="number" name="product1aantal" class="form-control" value="1">
+  </div>
+
+  <div class="form-group">
+    <label for="product2">Product 2</label>
+    <select class="form-control" name="product2" id="product2">
+      <option value="0">-</option>
+      {% for product in producten %}
+        <option value="{{ product.id }}">{{ product.categorie }} >>> {{ product.productnaam }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="product2aantal">Product 2 aantal</label>
+    <input id="product2aantal" type="number" name="product2aantal" class="form-control" value="1">
+  </div>
+
+  <div class="form-group">
+    <label for="product3">Product 3</label>
+    <select class="form-control" name="product3" id="product3">
+      <option value="0">-</option>
+      {% for product in producten %}
+        <option value="{{ product.id }}">{{ product.categorie }} >>> {{ product.productnaam }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="product3aantal">Product 3 aantal</label>
+    <input id="product3aantal" type="number" name="product3aantal" class="form-control" value="1">
+  </div>
+
+  <div class="form-group">
+    <label for="typeEnv">Type enveloppe</label>
+    <select class="form-control" name="typeEnv" id="typeEnv">
+      <option value="3">Standaard deluxe enveloppe</option>
+      <option value="5">Bubbeltjes enveloppe klein</option>
+      <option value="8">Bubbeltjes enveloppe groot</option>
+      <option value="0">Geen enveloppe en postzegel (0 gram)</option>
+    </select>
+  </div>
+
+  {{ form_row(form.marktplaatsaccount) }}
+
+  <a class="btn btn-danger btn-sm mb-5" href="{{ path('voorraad') }}"><i class="fas fa-arrow-left"></i> Terug</a>
+  <button type="submit" class="btn btn-primary btn-sm mb-5"><i class="fas fa-pen"></i> Verkopen</button>
+  {# Token CSRF #}
+  {{ form_widget(form._token) }}
+  {{ form_end(form, {'render_rest': false}) }}
+
+{% endblock %}

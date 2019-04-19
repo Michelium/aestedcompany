@@ -1,0 +1,45 @@
+{% extends 'shisha/shisha.layout.html.twig' %}
+
+{% block title %}Shisha | Afzet en omzet{% endblock %}
+{% block active2 %}active{% endblock %}
+
+{% block body %}
+  <script>
+      $(document).ready(function () {
+          $('.table').DataTable({
+              "paging": false,
+              "info": false,
+              "searching": false
+          });
+      });
+  </script>
+
+  {% for msg in app.session.flashBag.get('error') %}
+    <div class="alert alert-danger alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>ERROR!</strong> {{ msg }}
+    </div>
+  {% endfor %}
+
+  <h5>Afzet / Omzet:</h5>
+  <h5 class="text-success">Shisha pennen:</h5>
+  <table class="table table-sm table-hover table-responsive-lg mb-5">
+    <thead>
+    <tr>
+      <th style="width: 30%">Smaak</th>
+      <th style="width: 20%">Afzet</th>
+      <th style="width: 20%">Omzet</th>
+    </tr>
+    </thead>
+    <tbody id="myTable1">
+    {% for product in producten %}
+      <tr>
+        <td>{{ product.smaak }}</td>
+        <td>{{ product.aantalverkocht }}</td>
+        <td>€ {{ product.omzet |number_format(2, ',', '.') }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

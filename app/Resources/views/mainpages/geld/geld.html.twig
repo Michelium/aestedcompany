@@ -1,0 +1,137 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Financiën{% endblock %}
+{% block active5 %}active{% endblock %}
+
+{% block body %}
+  <h5>Financiën van de Aested Company:</h5>
+
+  <div class="row">
+
+    <div class="col-lg-4 col-sm-12">
+      <h5 class="text-success">Bestellingen per maand:</h5>
+      <ul class="list-group list-group-flush mb-5">
+        <li class="list-group-item"><strong>TOTAAL</strong> >>> <span
+                  class="badge badge-primary">€ {{ bestellingTotaal|number_format(2, ',', '.') }}</span></li>
+        {% set jaar1 = bestellingMaandJaarTotaal[0].Maand %}
+        {% for bestellingMJT in bestellingMaandJaarTotaal %}
+          {% if bestellingMJT.Jaar == jaar1 %}
+          {% else %}
+            {% set jaar1 = bestellingMJT.Jaar %}
+            <h5 class="list-group-item text-warning">{{ jaar1 }}</h5>
+          {% endif %}
+          <li class="list-group-item"><strong>{{ bestellingMJT.Maand }} {{ bestellingMJT.Jaar }}</strong> >>> <span
+                    class="badge {% if bestellingMJT.Totaal <= 0 %} badge-danger {% else %} badge-success {% endif %}">€ {{ bestellingMJT.Totaal|number_format(2, ',', '.') }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-12">
+      <h5 class="text-success">Omzet per maand:</h5>
+      <ul class="list-group list-group-flush mb-5">
+        <li class="list-group-item"><strong>TOTAAL</strong> >>> <span
+                  class="badge badge-primary">€ {{ omzetTotaal|number_format(2, ',', '.') }}</span></li>
+        {% for omzetMJT in omzetMaandJaarTotaal %}
+          {% if omzetMJT.Jaar == jaar1 %}
+          {% else %}
+            {% set jaar1 = omzetMJT.Jaar %}
+            <h5 class="list-group-item text-warning">{{ jaar1 }}</h5>
+          {% endif %}
+          <li class="list-group-item"><strong>{{ omzetMJT.Maand }} {{ omzetMJT.Jaar }}</strong> >>> <span
+                    class="badge {% if omzetMJT.Totaal <= 0 %} badge-danger {% else %} badge-success {% endif %}">€ {{ omzetMJT.Totaal|number_format(2, ',', '.') }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-12">
+      <h5 class="text-success">Winst per maand:</h5>
+      <ul class="list-group list-group-flush mb-5">
+        <li class="list-group-item"><strong>TOTAAL</strong> >>> <span
+                  class="badge badge-primary">€ {{ winstTotaal|number_format(2, ',', '.') }}</span></li>
+        {% for winstMJT in winstMaandJaarTotaal %}
+          {% if winstMJT.Jaar == jaar1 %}
+          {% else %}
+            {% set jaar1 = winstMJT.Jaar %}
+            <h5 class="list-group-item text-warning">{{ jaar1 }}</h5>
+          {% endif %}
+          <li class="list-group-item"><strong>{{ winstMJT.Maand }} {{ winstMJT.Jaar }}</strong> >>> <span
+                    class="badge {% if winstMJT.Winst <= 0 %} badge-danger {% else %} badge-success {% endif %}">€ {{ winstMJT.Winst|number_format(2, ',', '.') }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <h5>Financiën plus Aested Shisha:</h5>
+
+  <div class="row">
+
+    <div class="col-lg-4 col-sm-12">
+      <h5 class="text-success">Bestellingen per maand:</h5>
+      <ul class="list-group list-group-flush mb-5">
+        <li class="list-group-item"><strong>TOTAAL</strong> >>> <span
+                  class="badge badge-primary">€ {{ bestellingTotaal2|number_format(2, ',', '.') }}</span></li>
+        {% set jaar1 = bestellingMaandJaarTotaal2[0].Maand %}
+        {% for bestellingMJT in bestellingMaandJaarTotaal2 %}
+          {% if bestellingMJT.Jaar == jaar1 %}
+          {% else %}
+            {% set jaar1 = bestellingMJT.Jaar %}
+            <h5 class="list-group-item text-warning">{{ jaar1 }}</h5>
+          {% endif %}
+          <li class="list-group-item"><strong>{{ bestellingMJT.Maand }} {{ bestellingMJT.Jaar }}</strong> >>> <span
+                    class="badge {% if bestellingMJT.Totaal <= 0 %} badge-danger {% else %} badge-success {% endif %}">€ {{ bestellingMJT.Totaal|number_format(2, ',', '.') }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-12">
+      <h5 class="text-success">Omzet per maand:</h5>
+      <ul class="list-group list-group-flush mb-5">
+        <li class="list-group-item"><strong>TOTAAL</strong> >>> <span
+                  class="badge badge-primary">€ {{ omzetTotaal2|number_format(2, ',', '.') }}</span></li>
+        {% for omzetMJT in omzetMaandJaarTotaal2 %}
+          {% if omzetMJT.Jaar == jaar1 %}
+          {% else %}
+            {% set jaar1 = omzetMJT.Jaar %}
+            <h5 class="list-group-item text-warning">{{ jaar1 }}</h5>
+          {% endif %}
+          <li class="list-group-item"><strong>{{ omzetMJT.Maand }} {{ omzetMJT.Jaar }}</strong> >>> <span
+                    class="badge {% if omzetMJT.Totaal <= 0 %} badge-danger {% else %} badge-success {% endif %}">€ {{ omzetMJT.Totaal|number_format(2, ',', '.') }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="col-lg-4 col-sm-12">
+      <h5 class="text-success">Winst per maand:</h5>
+      <ul class="list-group list-group-flush mb-5">
+        <li class="list-group-item"><strong>TOTAAL</strong> >>> <span
+                  class="badge badge-primary">€ {{ winstTotaal2|number_format(2, ',', '.') }}</span></li>
+        {% for winstMJT in winstMaandJaarTotaal2 %}
+          {% if winstMJT.Jaar == jaar1 %}
+          {% else %}
+            {% set jaar1 = winstMJT.Jaar %}
+            <h5 class="list-group-item text-warning">{{ jaar1 }}</h5>
+          {% endif %}
+          <li class="list-group-item"><strong>{{ winstMJT.Maand }} {{ winstMJT.Jaar }}</strong> >>> <span
+                    class="badge {% if winstMJT.Winst <= 0 %} badge-danger {% else %} badge-success {% endif %}">€ {{ winstMJT.Winst|number_format(2, ',', '.') }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h5 class="text-success">Maandverslagen:</h5>
+
+
+      {% for orderMaandJaar in ordersMaandJaar %}
+        <a class="btn btn-primary btn-sm btn-block"
+           href="{{ path('geldoverzichtMaandverslag', {'maand' : orderMaandJaar["Maand"], 'jaar' : orderMaandJaar["Jaar"]}) }}">{{ orderMaandJaar["MaandNaam"] }} {{ orderMaandJaar["Jaar"] }}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

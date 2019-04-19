@@ -1,0 +1,170 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Producten{% endblock %}
+{% block active0 %}active{% endblock %}
+{% block username %} {{ user.username }} {% endblock %}
+
+{% block body %}
+
+  <style>
+    .btn:focus {
+    outline: none;
+    }
+  </style>
+
+  <script>
+      // $(document).ready(function () {
+      //     $("#myInput").on("keyup", function () {
+      //         var value = $(this).val().toLowerCase();
+      //         $("#myTable tr").filter(function () {
+      //             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      //         });
+      //     });
+      // });
+
+      // $(document).ready(function () {
+      //     $('.table').DataTable({
+      //         "paging": false,
+      //         "info": true,
+      //         "searching": true,
+      //         "orderable": false,
+      //         // "columnDefs": [
+      //         //     {"orderable": false, "targets": [2, 3]}
+      //         // ]
+      //     });
+      // });
+  </script>
+
+  <h5>Producten:</h5>
+
+  <a class="btn btn-dark btn-block my-2" onclick="this.blur();" data-toggle="collapse" href="#producten0" role="button" aria-expanded="false" aria-controls="producten0">
+    <h5 class="">Specials</h5>
+  </a>
+  <div class="collapse show my-2" id="producten0">
+    <h5 class="text-success">Specials:</h5>
+    <table class="table table-hover table-sm ">
+      <thead>
+      <tr>
+        <th style="width: 40%">Categorie</th>
+        <th style="width: 30%">Productnaam</th>
+        <th style="width: 10%">Inkoopprijs</th>
+        <th style="width: 8%; min-width: 200px;">Acties</th>
+        <th style="width: 5%">Populariteit</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for product in producten0 %}
+        <tr>
+          <td>{{ product.categorie }}</td>
+          <td>{{ product.productnaam }}</td>
+          <td>
+            <span class="badge badge-pill {% if ((product.inkoopprijs != 0) or (product.inkoopprijs != null)) and ((product.gewicht != null) or (product.gewicht != 0)) %} badge-success {% else %} badge-danger {% endif %} ">
+              {% if ((product.inkoopprijs != 0) or (product.inkoopprijs != null)) and ((product.gewicht != null) or (product.gewicht != 0)) %} Ingevuld {% else %} Niet ingevuld {% endif %}
+            </span>
+          </td>
+
+          <td>
+            <a class="btn btn-success btn-sm mx-1" href="{{ path('updateProduct', {'id': product.id}) }}"><i
+                      class="fas fa-pen"></i> Update</a>
+            <a class="btn btn-primary btn-sm mx-1" href="{{ path('productInfo', {'id': product.id}) }}"><i
+                      class="fas fa-info"></i> Info</a>
+          </td>
+          <td>
+            <a class="btn btn-secondary btn-sm disabled" href=""><i class="fas fa-angle-up"></i></a>
+            <a class="btn btn-secondary btn-sm" href="{{ path('productenMovePop', {'dir' : 'down', 'id': product.id}) }}"><i class="fas fa-angle-down"></i></a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a class="btn btn-dark btn-block my-2"  onclick="this.blur();" data-toggle="collapse" href="#producten1" role="button" aria-expanded="false" aria-controls="producten1">
+    <h5 class="">Actieve verkoop</h5>
+  </a>
+  <div class="collapse my-2" id="producten1">
+    <h5 class="text-success">Actieve verkoop:</h5>
+    <table class="table table-hover table-sm ">
+      <thead>
+      <tr>
+        <th style="width: 40%">Categorie</th>
+        <th style="width: 30%">Productnaam</th>
+        <th style="width: 10%">Inkoopprijs</th>
+        <th style="width: 8%; min-width: 200px;">Acties</th>
+        <th style="width: 5%">Populariteit</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for product in producten1 %}
+        <tr>
+          <td>{{ product.categorie }}</td>
+          <td>{{ product.productnaam }}</td>
+          <td>
+          <span class="badge badge-pill {% if ((product.inkoopprijs != 0) or (product.inkoopprijs != null)) or ((product.gewicht != null) or (product.gewicht != 0)) %} badge-success {% else %} badge-danger {% endif %} ">
+            {% if ((product.inkoopprijs != 0) or (product.inkoopprijs != null)) or ((product.gewicht != null) or (product.gewicht != 0)) %} Ingevuld {% else %} Niet ingevuld {% endif %}
+          </span>
+          </td>
+
+          <td>
+            <a class="btn btn-success btn-sm mx-1" href="{{ path('updateProduct', {'id': product.id}) }}"><i
+                      class="fas fa-pen"></i> Update</a>
+            <a class="btn btn-primary btn-sm mx-1" href="{{ path('productInfo', {'id': product.id}) }}"><i
+                      class="fas fa-info"></i> Info</a>
+          </td>
+          <td>
+            <a class="btn btn-secondary btn-sm" href="{{ path('productenMovePop', {'dir' : 'up', 'id': product.id}) }}"><i class="fas fa-angle-up"></i></a>
+            <a class="btn btn-secondary btn-sm" href="{{ path('productenMovePop', {'dir' : 'down', 'id': product.id}) }}"><i class="fas fa-angle-down"></i></a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a class="btn btn-dark btn-block my-2" onclick="this.blur();" data-toggle="collapse" href="#producten3" role="button" aria-expanded="false" aria-controls="producten3">
+    <h5 class="">Blacklist</h5>
+  </a>
+  <div class="collapse my-2" id="producten3">
+    <h5 class="text-success">Blacklist:</h5>
+    <table class="table table-sm table-hover table-responsive-lg">
+      <thead>
+      <tr>
+        <th style="width: 40%">Categorie</th>
+        <th style="width: 30%">Productnaam</th>
+        <th style="width: 10%">Inkoopprijs</th>
+        <th style="width: 10%; min-width: 200px;">Acties</th>
+        <th style="width: 5%">Populariteit</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for product in producten2 %}
+        <tr>
+          <td>{{ product.categorie }}</td>
+          <td>{{ product.productnaam }}</td>
+          <td>
+            <span class="badge badge-pill {% if ((product.inkoopprijs != 0) or (product.inkoopprijs != null)) and ((product.gewicht != null) or (product.gewicht != 0)) %} badge-success {% else %} badge-danger {% endif %} ">
+              {% if ((product.inkoopprijs != 0) or (product.inkoopprijs != null)) and ((product.gewicht != null) or (product.gewicht != 0)) %} Ingevuld {% else %} Niet ingevuld {% endif %}
+            </span>
+          </td>
+
+          <td>
+            <a class="btn btn-success btn-sm mx-1" href="{{ path('updateProduct', {'id': product.id}) }}"><i
+                      class="fas fa-pen"></i> Update</a>
+            <a class="btn btn-primary btn-sm mx-1" href="{{ path('productInfo', {'id': product.id}) }}"><i
+                      class="fas fa-info"></i> Info</a>
+          </td>
+          <td>
+            <a class="btn btn-secondary btn-sm" href="{{ path('productenMovePop', {'dir' : 'up', 'id': product.id}) }}"><i class="fas fa-angle-up"></i></a>
+            <a class="btn btn-secondary btn-sm disabled"><i class="fas fa-angle-down"></i></a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a class="btn btn-primary btn-sm mb-5" href="{{ path('addCategorie') }}"><i class="fas fa-plus"></i> Categorie
+    toevoegen</a>
+  <a class="btn btn-primary btn-sm mb-5" href="{{ path('addProduct') }}"><i class="fas fa-plus"></i> Product
+    toevoegen</a>
+{% endblock %}

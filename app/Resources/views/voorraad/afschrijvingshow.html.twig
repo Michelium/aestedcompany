@@ -1,0 +1,56 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Voorraad | Afschrijving {% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Afschrijving</h5>
+
+        <table class="table table-borderless table-hover">
+          <tr>
+            <th>Afschrijving ID:</th>
+            <td>{{ afschrijving.id }}</td>
+          </tr>
+          {% if app.session.get('mode') == 'default' %}
+            <tr>
+              <th>Artikel:</th>
+              <td>{{ afschrijving.artikel.naam }}</td>
+            </tr>
+            <tr>
+              <th>Categorie:</th>
+              <td>{{ afschrijving.artikel.categorie }}</td>
+            </tr>
+          {% elseif app.session.get('mode') == 'shisha' %}
+            <tr>
+              <th>Smaak:</th>
+              <td>{{ bestelling.artikel.naam }}</td>
+            </tr>
+          {% endif %}
+          <tr>
+            <th>Aantal:</th>
+            <td>{{ afschrijving.aantal }}</td>
+          </tr>
+          <tr>
+            <th>Reden:</th>
+            <td>{{ afschrijving.reden }}</td>
+          </tr>
+          <tr>
+            <th>Extra reden:</th>
+            <td>{{ afschrijving.redenText }}</td>
+          </tr>
+          <tr>
+            <th>Datum:</th>
+            <td>{{ afschrijving.datum|date('d-m-Y H:i:s') }}</td>
+          </tr>
+        </table>
+
+        <button type="button" class="btn btn-danger btn-sm" onclick="window.history.back()"><i class="fas fa-arrow-left"></i> Terug</button>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

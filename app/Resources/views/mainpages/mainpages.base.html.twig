@@ -1,0 +1,96 @@
+{% extends 'layout.html.twig' %}
+
+{% block clearbody %}
+  <div class="container-fluid w-75 mb-3">
+    {% block header %}
+      <h1 class="display-4 mt-4"><span><img src="{{ asset('img/aested.png') }}" height="100px"></span>Aested Company
+      </h1>
+      <hr>
+      {#<p><span class="badge badge-warning">OPMERKING</span> Er zijn momenteel wat dingen stuk (producten updaten,#}
+      {#toevoegen.) Kan hier later pas weer aan werken. De veranderingen waren al doorgevoerd.</p>#}
+    {% endblock %}
+    {% block navbar %}
+      <nav class="navbar navbar-expand-lg navbar-dark text-white bg-dark mt-3 mb-3 border border-0">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#colNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="colNav">
+          {% block navinhoud %}
+          {% if app.user %}
+            <ul class="navbar-nav ">
+              <li class="nav-item {% block active0 %}{% endblock %}">
+                <a href="{{ path('producten') }}" class="nav-link">Producten</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ">
+              <li class="nav-item {% block active1 %}{% endblock %}">
+                <a href="{{ path('voorraad') }}" class="nav-link">Voorraad / Verkoop</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav">
+              <li class="nav-item {% block active2 %}{% endblock %}">
+                <a href="{{ path('afzetomzet') }}" class="nav-link">Afzet / Omzet</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ">
+              <li class="nav-item {% block active3 %}{% endblock %}">
+                <a href="{{ path('bestellingen') }}" class="nav-link">Bestellingen</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ">
+              <li class="nav-item {% block active4 %}{% endblock %}">
+                <a href="{{ path('log') }}" class="nav-link">Log</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ">
+              <li class="nav-item {% block active5 %}{% endblock %}">
+                <a href="{{ path('geldoverzicht') }}" class="nav-link">Financiën</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ">
+              <li class="nav-item {% block active6 %}{% endblock %}">
+                <a href="{{ path('updates') }}" class="nav-link">Updates</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ">
+              <li class="nav-item {% block active7 %}{% endblock %}">
+                <a href="{{ path('klachten') }}" class="nav-link">Klachten</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ">
+              <li class="nav-item">
+                <a href="{{ path('shishaArtikelen') }}" class="nav-link  btn btn-secondary btn-sm text-info">Shisha</a>
+              </li>
+            </ul>
+          {% else %}
+            <ul class="navbar-nav ">
+              <li class="nav-item">
+                <a href="{{ path('homepage') }}" class="btn btn-dark btn-sm nav-link">Home</a>
+              </li>
+            </ul>
+          {% endif %}
+          {% endblock %}
+          <hr>
+          <ul class="navbar-nav ml-auto">
+            {% if app.user %}
+              <span class="navbar-text mr-3">Ingelogd als: <b>{{ app.user.username }}</b></span>
+              <li class="nav-item">
+                <a href="{{ path('logout') }}">
+                  <button class="btn btn-danger">Uitloggen</button>
+                </a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{{ path('index') }}" class="btn btn-success">Inloggen</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+    {% endblock %}
+
+    {% block body %}
+    {% endblock %}
+
+  </div>
+{% endblock %}

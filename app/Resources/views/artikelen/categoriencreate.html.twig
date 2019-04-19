@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Artikelen | Categorie toevoegen {% endblock %}
+
+{% block content %}
+
+  {#SHISHA MODE OFF#}
+  {% if app.session.get('mode') == 'default' %}
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <h5>Categorie toevoegen</h5>
+
+          {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+          {{ form_row(form.naam) }}
+
+          <button type="button" class="btn btn-danger btn-sm" onclick="window.history.back()"><i
+                    class="fas fa-arrow-left"></i> Terug
+          </button>
+          <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Toevoegen</button>
+
+          {{ form_widget(form._token) }}
+          {{ form_end(form, {'render_rest': false}) }}
+        </div>
+      </div>
+    </div>
+
+    {#SHISHA MODE ON#}
+  {% elseif app.session.get('mode') == 'shisha' %}
+    <div class="row">
+      <span class="alert alert-danger">Pagina niet beschikbaar in shisha mode.</span>
+    </div>
+  {% endif %}
+
+
+{% endblock %}

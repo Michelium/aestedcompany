@@ -1,0 +1,104 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Financiën | Bereken verkooprijs{% endblock %}
+{% block active5 %}active{% endblock %}
+
+{% block body %}
+  {% if shisha == 'shisha' %}
+    {% block navinhoud %}
+    {% endblock %}
+  {% endif %}
+  <h5>Bereken verkoopprijs:</h5>
+  {% if product1 != null %}
+    <div class="card text-white my-3" style="max-width: 18rem;">
+      <div class="card-header bg-success">Berekening verkoopprijs</div>
+      <div class="card-body">
+        <h5 class="card-title text-success">Product 1:</h5>
+        <p class="card-text">{% if shisha == 'shisha' %}Smaak: {{ product1.smaak }}{% else %}Naam: {{ product1.productnaam }}{% endif %}</p>
+        <p class="card-text">Aantal: {{ product1Aantal }}</p>
+        {% if product2 != null %}
+          <h5 class="card-title text-success">Product 2:</h5>
+          <p class="card-text">{% if shisha == 'shisha' %}Smaak: {{ product2.smaak }}{% else %}Naam: {{ product2.productnaam }}{% endif %}</p>
+          <p class="card-text">Aantal: {{ product2Aantal }}</p>
+        {% endif %}
+        {% if product3 != null %}
+          <h5 class="card-title text-success">Product 3:</h5>
+          <p class="card-text">{% if shisha == 'shisha' %}Smaak: {{ product3.smaak }}{% else %}Naam: {{ product3.productnaam }}{% endif %}</p>
+          <p class="card-text">Aantal: {{ product3Aantal }}</p>
+        {% endif %}
+        <hr>
+        <h5 class="card-title text-success ">Verzendkosten: </h5>
+        <p class="card-text">€ {{ verzendkosten|number_format(2, ',', '.') }}</p>
+        <h5 class="card-title text-success">Totaal gewicht: </h5>
+        <p class="card-text">{{ totaalGewicht }} gram</p>
+        <h5 class="card-title text-success">Totaal: </h5>
+        <h5 class="card-text"><strong>€ {{ totaal|number_format(2, ',', '.') }}</strong></h5>
+      </div>
+    </div>
+  {% endif %}
+
+  <form action="
+    {% if shisha == 'shisha' %} {{ path('geldoverzichtBerekenVerkoopprijs', {'shisha' : 'shisha'}) }}
+    {% else %} {{ path('geldoverzichtBerekenVerkoopprijs') }}
+    {% endif %}"
+        id="selectieform" method="post">
+    <div class="form-group">
+      <label for="product1">Product 1</label>
+      <select class="form-control" name="product1" id="product1">
+        <option value="0">-</option>
+        {% for product in producten %}
+          <option value="{{ product.id }}">{{ product.categorie }} {% if shisha == 'shisha' %} {{ product.smaak }} {% else %} >>> {{ product.productnaam }} {% endif %}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="product1aantal">Product 1 aantal</label>
+      <input id="product1aantal" type="number" name="product1aantal" class="form-control" value="1">
+    </div>
+
+    <div class="form-group">
+      <label for="product2">Product 2</label>
+      <select class="form-control" name="product2" id="product2">
+        <option value="0">-</option>
+        {% for product in producten %}
+          <option value="{{ product.id }}">{{ product.categorie }} {% if shisha == 'shisha' %} {{ product.smaak }} {% else %} >>> {{ product.productnaam }} {% endif %}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="product2aantal">Product 2 aantal</label>
+      <input id="product2aantal" type="number" name="product2aantal" class="form-control" value="1">
+    </div>
+
+    <div class="form-group">
+      <label for="product3">Product 3</label>
+      <select class="form-control" name="product3" id="product3">
+        <option value="0">-</option>
+        {% for product in producten %}
+          <option value="{{ product.id }}">{{ product.categorie }} {% if shisha == 'shisha' %} {{ product.smaak }} {% else %} >>> {{ product.productnaam }} {% endif %}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="product3aantal">Product 3 aantal</label>
+      <input id="product3aantal" type="number" name="product3aantal" class="form-control" value="1">
+    </div>
+
+    <div class="form-group">
+      <label for="typeEnv">Type enveloppe</label>
+      <select class="form-control" name="typeEnv" id="typeEnv">
+        <option value="3">Standaard deluxe enveloppe</option>
+        <option value="5">Bubbeltjes enveloppe klein</option>
+        <option value="8">Bubbeltjes enveloppe groot</option>
+      </select>
+    </div>
+
+    {% if shisha == 'shisha' %}
+      <a href="{{ path('shishaVoorraad') }}" class="btn btn-danger">Terug</a>
+    {% else %}
+      <a href="{{ path('voorraad') }}" class="btn btn-danger">Terug</a>
+    {% endif %}
+    <input type="submit" class="btn btn-primary" value="Berekenen">
+  </form>
+
+{% endblock %}

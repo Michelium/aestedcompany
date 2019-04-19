@@ -1,0 +1,14 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Bestelling bezorgd{% endblock %}
+{% block active3 %}active{% endblock %}
+{% block username %} {{ app.user.username }} {% endblock %}
+
+{% block body %}
+  <h5>Bestelling afleveren:</h5>
+  <p><span class="badge badge-warning">WAARSCHUWING</span> Dit kan niet meer ongedaan gemaakt worden! </p>
+  {{ form_start(form) }}
+  {{ form_widget(form) }}
+  <a class="btn btn-danger btn-sm mb-5" href="{{ path('bestellingen') }}"><i class="fas fa-arrow-left"></i> Terug</a>
+  {{ form_end(form) }}
+{% endblock %}

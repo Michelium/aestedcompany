@@ -1,0 +1,29 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Bestellingen | Bestelling updaten {% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Bestelling updaten</h5>
+
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+        {{ form_row(form.aantal) }}
+        {{ form_row(form.bedrag) }}
+        {{ form_row(form.korting) }}
+        {{ form_row(form.extraInfo) }}
+
+        <button type="button" class="btn btn-danger btn-sm" onclick="window.history.back()"><i class="fas fa-arrow-left"></i> Terug</button>
+        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> Updaten</button>
+
+        {{ form_widget(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

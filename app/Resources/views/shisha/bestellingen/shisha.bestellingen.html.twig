@@ -1,0 +1,106 @@
+{% extends 'shisha/shisha.layout.html.twig' %}
+
+{% block title %}Shisha | Bestellingen{% endblock %}
+{% block active3 %}active{% endblock %}
+
+
+{% block body %}
+
+  <script>
+      $(document).ready(function () {
+          $('#bezorgdTable').DataTable({
+              "paging": true,
+              "info": true,
+              "searching": true,
+              "pageLength": 25,
+              "order": [[6, 'DESC']],
+              "columnDefs": [
+                  {"orderable": false, "targets": [4,5,6]}
+              ]
+          });
+          $('#bestellingTable').DataTable({
+              "paging": false,
+              "info": true,
+              "searching": true,
+              "order": [[0, 'ASC']],
+              "columnDefs": [
+                  {"orderable": false, "targets": [7, 8]}
+              ]
+          });
+
+
+      });
+  </script>
+
+  <h5>Bestellingen:</h5>
+
+  <a class="btn btn-primary btn-sm my-2" href="{{ path('shishaBestellingenAdd') }}"><i class="fas fa-cart-plus"></i> Bestelling
+    invoeren</a>
+
+  <h5 class="text-success">Alle ongeleverde bestellingen:</h5>
+  <table id="bestellingTable" class="table table-sm table-hover table-responsive-lg">
+    <thead>
+    <tr>
+      <th style="width: 2%">ID</th>
+      <th style="width: 30%">Smaak</th>
+      <th style="width: 9%">Aantal</th>
+      <th style="width: 10%">Inkoopprijs</th>
+      <th style="width: 10%">Besteldatum</th>
+      <th style="width: 3%"><i class="fas fa-pen"></i></th>
+      <th style="width: 5%">Bezorgd</th>
+    </tr>
+    </thead>
+    <tbody id="myTable">
+    {% for bestelling in bestellingenOpen %}
+      <tr>
+        <td>{{ bestelling.id }}</td>
+        <td>{{ bestelling.smaak }}</td>
+        <td>{{ bestelling.besteldaantal }}</td>
+        <td>€ {{ bestelling.inkoopprijs|number_format(2,',','.') }}</td>
+        <td>{{ bestelling.besteldatum|date("d-m-Y") }}</td>
+        <td>
+          {#<a href="{{ path('bestellingupdate', {'id' : bestelling.id}) }}"><i class="fas fa-pen text-secondary"></i></a>#}
+        </td>
+        <td>
+          <a class="btn btn-success btn-sm mr-2" href="{{ path('shishaBestellingenBezorg', {'id': bestelling.id}) }}"><i
+                    class="fas fa-archive"></i> Bezorgd</a>
+        </td>
+
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <hr>
+  <h5 class="text-success">Alle bezorgde bestellingen:</h5>
+  <table id="bezorgdTable" class="table table-sm table-hover table-responsive-lg">
+    <thead>
+    <tr>
+      <th style="width: 2%">ID</th>
+      <th style="width: 23%">Smaak</th>
+      <th style="width: 9%">Aantal</th>
+      <th style="width: 10%">Inkoopprijs</th>
+      <th style="width: 10%">Besteldatum</th>
+      <th style="width: 10%">Ontvangstdatum</th>
+      <th style="width: 3%">Info</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for bestellingbezorgd in bestellingenBezorgd %}
+      <tr>
+        <td>{{ bestellingbezorgd.id }}</td>
+        <td>{{ bestellingbezorgd.smaak }}</td>
+        <td>{{ bestellingbezorgd.besteldaantal }}</td>
+        <td>€ {{ bestellingbezorgd.inkoopprijs|number_format(2, ',', '.') }}</td>
+        <td>{{ bestellingbezorgd.besteldatum|date("d-m-Y") }}</td>
+        <td>{{ bestellingbezorgd.ontvangstdatum|date("d-m-Y") }}</td>
+        <td>
+          <a class=" {% if bestellingbezorgd.extraInfo != null %} btn btn-success  {% else %} btn btn-secondary {% endif %} btn-sm mr-2"
+             href="{{ path('bestellingdetail', {'id': bestellingbezorgd.id}) }}"><i
+                    class="fas fa-info"></i>&nbsp; Info</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

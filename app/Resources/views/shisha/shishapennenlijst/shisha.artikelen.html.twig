@@ -1,0 +1,44 @@
+{% extends 'shisha/shisha.layout.html.twig' %}
+
+{% block title %}Shisha | Shisha pennen lijst{% endblock %}
+{% block active0 %}active{% endblock %}
+
+{% block body %}
+  <h5>Artikelen:</h5>
+
+  <a class="btn btn-primary btn-sm my-2" href="{{ path("shishaArtikelenAdd") }}"><i class="fas fa-plus"></i> Shisha pen
+    toevoegen</a>
+
+  <h5 class="text-success">Shisha pennen:</h5>
+  <table class="table table-hover table-sm ">
+    <thead>
+    <tr>
+      <th style="width: 60%">Smaak</th>
+      <th style="width: 10%">Gewicht</th>
+      <th style="width: 10%">Min. verkoopprijs</th>
+      <th style="width: 10%">Inkoopprijs</th>
+      <th style="width: 2%; min-width: 200px;">Acties</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in producten %}
+      <tr>
+        <td>{{ product.smaak }}</td>
+        <td>{% if product.gewicht %} {{ product.gewicht }} gram {% else %} <span class="badge badge-danger">Niet ingevuld</span> {% endif %}
+        </td>
+        <td>{% if product.minimaleVerkoopprijs != 0 %}€ {{ product.minimaleVerkoopprijs|number_format(2, ',', '.') }} {% else %}
+            <span class="badge badge-danger">Niet beschikbaar</span> {% endif %}</td>
+        <td>{% if product.inkoopprijs != 0 %}€ {{ product.inkoopprijs|number_format(2, ',', '.') }}{% else %} <span
+                  class="badge badge-danger">Niet ingevuld</span> {% endif %}</td>
+
+        <td>
+          <a class="btn btn-success btn-sm mx-1" href="{{ path('shishaArtikelenUpdate', {'id': product.id}) }}"><i
+                    class="fas fa-pen"></i> Update</a>
+          <a class="disabled btn btn-primary btn-sm mx-1" href="{{ path('productInfo', {'id': product.id}) }}"><i
+                    class="fas fa-info"></i> Info</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

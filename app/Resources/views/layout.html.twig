@@ -1,0 +1,219 @@
+{% extends 'base.html.twig' %}
+
+{% block clearbody %}
+
+  <div class="container-fluid p-0">
+
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #26354A">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+              data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand ml-1" style="width: 203px;" href="{{ path('home') }}">
+        <span class="menu-collapsed">Aested Company</span>
+      </a>
+      <span class="text-white">{% block title %} page title{% endblock %}</span>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+          {#MOBILE NAVBAR#}
+          <li class="nav-item dropdown d-sm-block d-md-none">
+            <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+              Menu
+            </a>
+            <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
+              <a class="dropdown-item" href="#">Dashboard</a>
+              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" href="#">Tasks</a>
+              <a class="dropdown-item" href="#">Etc ...</a>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+
+
+    <!-- Bootstrap row -->
+    <div class="row p-0" id="body-row">
+      <!-- Sidebar -->
+      <div id="sidebar-container" class="hide-this sidebar-expanded d-none d-md-block">
+        <!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
+        <!-- Bootstrap List Group -->
+        <ul class="list-group">
+          <!-- Separator with title -->
+          <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+            <small>MAIN MENU</small>
+          </li>
+          <!-- /END Separator -->
+          <!-- Menu with submenu -->
+          <a href="#submenu1" data-toggle="collapse" aria-expanded="false"
+             class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fas fa-list-alt fa-fw mr-3"></span>
+              <span class="menu-collapsed">Artikelen</span>
+              <i class="ml-auto fa fa-chevron-down"></i>
+            </div>
+          </a>
+          <!-- Submenu content -->
+          <div id='submenu1' class="collapse sidebar-submenu">
+            <a href="{{ path('artikelen_artikelenIndex') }}" class="list-group-item list-group-item-action bg-dark text-white">
+              <span class="menu-collapsed">Artikelen</span>
+            </a>
+            <a href="{{ path('artikelen_categorienIndex') }}" class="list-group-item list-group-item-action bg-dark text-white">
+              <span class="menu-collapsed">Categoriën</span>
+            </a>
+          </div>
+          <a href="#submenu2" data-toggle="collapse" aria-expanded="false"
+             class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-boxes fa-fw mr-3"></span>
+              <span class="menu-collapsed">Voorraad</span>
+              <i class="ml-auto fa fa-chevron-down"></i>
+            </div>
+          </a>
+          <!-- Submenu content -->
+          <div id='submenu2' class="collapse sidebar-submenu">
+            <a href="{{ path('voorraad_voorraadArtikelIndex') }}" class="list-group-item list-group-item-action bg-dark text-white">
+              <span class="menu-collapsed">Voorraad per artikel</span>
+            </a>
+            <a href="{{ path('voorraad_artikelenVerkopenIndex') }}" class="list-group-item list-group-item-action bg-dark text-white">
+              <span class="menu-collapsed">Artikelen verkopen</span>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+              <span class="menu-collapsed">Verkoopprijs berekenen</span>
+            </a>
+            <a href="{{ path('voorraad_afschrijvingIndex') }}" class="list-group-item list-group-item-action bg-dark text-white">
+              <span class="menu-collapsed">Afschrijving</span>
+            </a>
+          </div>
+          <a href="#submenu3" data-toggle="collapse" aria-expanded="false"
+             class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-tasks fa-fw mr-3"></span>
+              <span class="menu-collapsed">Bestellingen</span>
+              <i class="ml-auto fa fa-chevron-down"></i>
+            </div>
+          </a>
+          <!-- Submenu content -->
+          <div id='submenu3' class="collapse sidebar-submenu">
+            <a href="{{ path('bestellingen_invoerenIndex') }}" class="list-group-item list-group-item-action bg-dark text-white">
+              <span class="menu-collapsed">Invoeren</span>
+            </a>
+            <a href="{{ path('bestellingen_openstaandIndex') }}" class="list-group-item list-group-item-action bg-dark text-white">
+              <span class="menu-collapsed">Openstaand</span>
+            </a>
+            <a href="{{ path('bestellingen_bezorgdIndex') }}" class="list-group-item list-group-item-action bg-dark text-white">
+              <span class="menu-collapsed">Bezorgd</span>
+            </a>
+          </div>
+          <a href="#" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-file-invoice-dollar fa-fw mr-3"></span>
+              <span class="menu-collapsed">Afzet</span>
+            </div>
+          </a>
+          <a href="{{ path('klantenbestellingen_index') }}" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-shopping-cart fa-fw mr-3"></span>
+              <span class="menu-collapsed">Klantenbestellingen</span>
+            </div>
+          </a>
+          <a href="#" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-euro-sign fa-fw mr-3"></span>
+              <span class="menu-collapsed">Financiën</span>
+            </div>
+          </a>
+          <!-- Separator with title -->
+          <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+            <small>OVERIG</small>
+          </li>
+          <!-- /END Separator -->
+          <a href="#" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-clipboard-list fa-fw mr-3"></span>
+              <span class="menu-collapsed">Updates</span>
+            </div>
+          </a>
+          <a href="#" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fas fa-comment-dots fa-fw mr-3"></span>
+              <span class="menu-collapsed">Opmerkingen</span>
+            </div>
+          </a>
+          <!-- Separator without title -->
+          <li class="list-group-item sidebar-separator menu-collapsed"></li>
+          <!-- /END Separator -->
+          <a href="{{ path('togglemode', { 'route' : app.request.get('_route') }) }}" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-smoking fa-fw mr-3"></span>
+              <span class="menu-collapsed">Shisha mode
+                {% if app.session.get('mode') == 'default' or app.session.get('mode') == null %} <span class="badge badge-danger badge-pill">Uit</span>
+                {% elseif app.session.get('mode') == 'shisha' %} <span class="badge badge-success badge-pill">Aan</span>{% endif %}
+              </span>
+            </div>
+          </a>
+          <a href="{{ path('toggleEditMode', { 'route' : app.request.get('_route') }) }}" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-edit fa-fw mr-3"></span>
+              <span class="menu-collapsed">Edit mode
+                {% if app.session.get('editMode') == 'off' or app.session.get('editMode') == null %} <span class="badge badge-danger badge-pill">Uit</span>
+                {% elseif app.session.get('editMode') == 'on' %} <span class="badge badge-success badge-pill">Aan</span>{% endif %}
+              </span>
+            </div>
+          </a>
+          <a href="#" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-users fa-fw mr-3"></span>
+              <span class="menu-collapsed">Gebruikersbeheer</span>
+            </div>
+          </a>
+          <a href="#" class="bg-success list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-user fa-fw mr-3"></span>
+              <span class="menu-collapsed">Profiel</span>
+            </div>
+          </a>
+          <a href="{{ path('logout') }}" class="bg-danger list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-sign-out-alt fa-fw mr-3"></span>
+              <span class="menu-collapsed">Uitloggen</span>
+            </div>
+          </a>
+          <li class="mt-5 list-group">
+            <small class="text-muted mx-auto">Michel Hamelink</small>
+            <small class="text-muted mx-auto">Versie 2.0</small>
+          </li>
+        </ul>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="col m-4 content-wrapper">
+
+        {% for label, messages in app.flashes %}
+          {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endfor %}
+
+        {% block content %}
+          <ul>
+            <li>Add row</li>
+            <li>Add col-lg-xx and col-md-xx</li>
+            <li>Add card</li>
+            <li>Add card title ("h5") </li>
+            <li>Add card content ("p")</li>
+          </ul>
+        {% endblock %}
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}

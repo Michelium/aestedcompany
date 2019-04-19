@@ -1,0 +1,62 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Bestellingen | Bezorgd {% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Bezorgde bestellingen</h5>
+
+        <table class="table table-hover table-sm">
+          <thead>
+          <tr>
+            <th style="width: 5%">ID</th>
+            <th style="width: 10%">Besteldatum</th>
+            <th style="width: 10%;">Ontvangstdatum</th>
+            {% if app.session.get('mode') == 'default' %}
+              <th style="width: 20%">Categorie</th>
+              <th style="width: 30%">Artikel</th>
+            {% elseif app.session.get('mode') == 'shisha'  %}
+              <th style="width: 50%">Smaak</th>
+            {% endif %}
+            <th style="width: 10%">Aantal</th>
+            <th style="width: 10%">Bedrag</th>
+            <th style="width: 10%; min-width: 100px;">Acties</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for bestelling in bestellingen %}
+            <tr>
+              <td>{{ bestelling.id }}</td>
+              <td>{{ bestelling.datum|date('d-m-Y') }}</td>
+              <td>{{ bestelling.ontvangstdatum|date('d-m-Y') }}</td>
+              {% if app.session.get('mode') == 'default' %}
+                {% if bestelling.customname %}
+                  <td><span class="badge badge-danger">Niet beschikbaar</span></td>
+                  <td>{{ bestelling.naam }}</td>
+                {% else %}
+                  <td>{{ bestelling.artikel.categorie }}</td>
+                  <td>{{ bestelling.artikel.naam }}</td>
+                {% endif %}
+              {% elseif app.session.get('mode') == 'shisha' %}
+                <td>{{ bestelling.artikel.naam }}</td>
+              {% endif %}
+              <td>{{ bestelling.aantal }}</td>
+              <td>€ {{ bestelling.bedrag|number_format(2, ',', '.') }}</td>
+              <td class="btn-group">
+                <a class="btn btn-primary btn-sm mx-1"
+                   href="{{ path('bestellingen_show', {'id': bestelling.id}) }}"><i
+                          class="fas fa-eye"></i> Show</a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

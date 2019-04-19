@@ -1,0 +1,47 @@
+{% extends 'shisha/shisha.layout.html.twig' %}
+
+{% block title %} Shisha | Voorraad {% endblock %}
+{% block active1 %} active {% endblock %}
+
+{% block body %}
+  <h5>Voorraad:</h5>
+
+  {% if is_granted('ROLE_SHISHA_ADMIN') %}
+    <a href="{{ path('geldoverzichtBerekenVerkoopprijs', {'shisha' : 'shisha'}) }}" class="btn btn-primary btn-sm my-2"><i
+              class="fas fa-calculator"></i> Verkoopprijs
+      berekenen</a>
+  {% endif %}
+  <a class="btn btn-primary btn-sm" href="{{ path('shishaVoorraadVerkoop') }}"><i class="fas fa-shopping-cart"></i>
+    Producten verkopen</a>
+
+  <h5 class="text-success">Shisha pennen:</h5>
+  <table class="table table-sm table-hover table-responsive-lg">
+    <thead>
+    <tr>
+      <th style="width: 60%">Smaak</th>
+      <th style="width: 10%">Min. voorraad</th>
+      <th style="width: 20%">Voorraad</th>
+    </tr>
+    </thead>
+    <tbody id="myTable">
+    {% for product in producten %}
+      <tr>
+        <td>{{ product.smaak }}</td>
+        <td>{% if product.minimaleVoorraad %}{{ product.minimaleVoorraad }}{% else %} <span class="badge badge-danger">Niet ingevuld</span>{% endif %}</td>
+        <td>{{ product.aantalvoorraad }}
+          {% if (product.aantalvoorraad < product.minimaleVoorraad) and (product.aantalvoorraad != 0) %} <span
+                  class="ml-2 badge {% if product.besteld %} badge-secondary {% else %} badge-warning {% endif %}badge-pill">Onder MV!</span>
+          {% elseif product.aantalvoorraad == 0 %} <span
+                  class="ml-2 badge {% if product.besteld %} badge-secondary {% else %} badge-danger {% endif %} badge-pill">Voorraad op!</span>
+          {% endif %}
+          {% if product.besteld == true %} <span class="ml-2 badge badge-success badge-pill">Besteld!</span> {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+
+
+
+{% endblock %}

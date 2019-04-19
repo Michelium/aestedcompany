@@ -1,0 +1,134 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Afzet en omzet{% endblock %}
+{% block active2 %}active{% endblock %}
+{% block username %} {{ app.user.username }} {% endblock %}
+
+
+
+{% block body %}
+  <script>
+      $(document).ready(function () {
+          $("#myInput").on("keyup", function () {
+              var value = $(this).val().toLowerCase();
+              $(".table tr").filter(function () {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+              });
+          });
+      });
+
+      $(document).ready(function () {
+          $('.table').DataTable({
+              "paging": false,
+              "info": false,
+              "searching": false
+          });
+      });
+  </script>
+
+  {% for msg in app.session.flashBag.get('error') %}
+    <div class="alert alert-danger alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>ERROR!</strong> {{ msg }}
+    </div>
+  {% endfor %}
+
+  <h5>Afzet en omzet per product:</h5>
+  <input class="form-control my-2" id="myInput" type="text" placeholder="Zoeken..">
+  <h5 class="text-success">Specials:</h5>
+  <table class="table table-sm table-hover table-responsive-lg mb-5">
+    <thead>
+    <tr>
+      <th style="width: 2%">ID</th>
+      <th style="width: 30%">Categorie</th>
+      <th style="width: 30%">Product</th>
+      <th style="width: 20%">Afzet</th>
+      <th style="width: 20%">Omzet</th>
+    </tr>
+    </thead>
+    <tbody id="myTable1">
+    {% for product in producten0 %}
+      <tr>
+        <td>{{ product.ID }}</td>
+        <td>{{ product.categorie }}</td>
+        <td>{{ product.productnaam }}</td>
+        <td>{{ product.aantalverkocht }}</td>
+        <td>€ {{ product.omzet |number_format(2, ',', '.') }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <h5 class="text-success">Actieve verkoop:</h5>
+  <table class="table table-sm table-hover table-responsive-lg mb-5">
+    <thead>
+    <tr>
+      <th style="width: 2%">ID</th>
+      <th style="width: 30%">Categorie</th>
+      <th style="width: 30%">Product</th>
+      <th style="width: 20%">Afzet</th>
+      <th style="width: 20%">Omzet</th>
+    </tr>
+    </thead>
+    <tbody id="myTable1">
+    {% for product in producten1 %}
+      <tr>
+        <td>{{ product.ID }}</td>
+        <td>{{ product.categorie }}</td>
+        <td>{{ product.productnaam }}</td>
+        <td>{{ product.aantalverkocht }}</td>
+        <td>€ {{ product.omzet |number_format(2, ',', '.') }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <h5 class="text-success">Shisha pennen:</h5>
+  <table class="table table-sm table-hover table-responsive-lg mb-5">
+    <thead>
+    <tr>
+      <th style="width: 2%">ID</th>
+      <th style="width: 30%">Categorie</th>
+      <th style="width: 30%">Product</th>
+      <th style="width: 20%">Afzet</th>
+      <th style="width: 20%">Omzet</th>
+    </tr>
+    </thead>
+    <tbody id="myTable1">
+    {% for product in producten2 %}
+      <tr>
+        <td>{{ product.ID }}</td>
+        <td>{{ product.categorie }}</td>
+        <td>{{ product.productnaam }}</td>
+        <td>{{ product.aantalverkocht }}</td>
+        <td>€ {{ product.omzet |number_format(2, ',', '.') }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <h5 class="text-success">Blacklist:</h5>
+  <table class="table table-sm table-hover table-responsive-lg mb-5">
+    <thead>
+    <tr>
+      <th style="width: 2%">ID</th>
+      <th style="width: 30%">Categorie</th>
+      <th style="width: 30%">Product</th>
+      <th style="width: 20%">Afzet</th>
+      <th style="width: 20%">Omzet</th>
+    </tr>
+    </thead>
+    <tbody id="myTable1">
+    {% for product in producten3 %}
+      <tr>
+        <td>{{ product.ID }}</td>
+        <td>{{ product.categorie }}</td>
+        <td>{{ product.productnaam }}</td>
+        <td>{{ product.aantalverkocht }}</td>
+        <td>€ {{ product.omzet |number_format(2, ',', '.') }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

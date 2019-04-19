@@ -1,0 +1,73 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Voorraad | Afschrijving {% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Nieuwe afschrijving</h5>
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+        {{ form_row(form.artikel) }}
+        {{ form_row(form.aantal) }}
+        {{ form_row(form.reden) }}
+        {{ form_row(form.redenText) }}
+
+        <button type="submit" class="btn btn-primary btn-sm my-2"><i class="fas fa-minus"></i> Afschrijven</button>
+
+        {# Token CSRF #}
+        {{ form_widget(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5>Vorige afschrijvingen</h5>
+        <table class="table table-hover table-sm">
+          <thead>
+          <tr>
+            {% if app.session.get('mode') == 'default' %}
+            <th style="width: 20%;">Categorie</th>
+            <th style="width: 30%">Naam</th>
+            {% elseif app.session.get('mode') == 'shisha' %}
+            <th style="width: 50%">Smaak</th>
+            {% endif %}
+            <th style="width: 10%">Aantal</th>
+            <th style="width: 20%">Reden</th>
+            <th style="width: 10%">Datum</th>
+            <th style="width: 10%; min-width: 100px">Acties</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for afschrijving in afschrijvingen %}
+            <tr>
+              {% if app.session.get('mode') == 'default' %}
+                <td>{{ afschrijving.artikel.categorie }}</td>
+                <td>{{ afschrijving.artikel.naam }}</td>
+              {% elseif app.session.get('mode') == 'shisha' %}
+                <td>{{ afschrijving.artikel.naam }}</td>
+              {% endif %}
+              <td>{{ afschrijving.aantal }}</td>
+              <td>{{ afschrijving.reden }}</td>
+              <td>{{ afschrijving.datum|date('d-m-Y') }}</td>
+              <td>
+                <a class="btn btn-success btn-sm mx-1"
+                   href="{{ path('voorraad_afschrijvingShow', {'id': afschrijving.id}) }}"><i
+                          class="fas fa-eye"></i> Show</a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

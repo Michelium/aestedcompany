@@ -1,0 +1,71 @@
+{% extends 'mainpages/mainpages.layout.html.twig' %}
+
+{% block title %}Log detail{% endblock %}
+{% block active4 %}active{% endblock %}
+{% block username %} {{ user.username }} {% endblock %}
+
+{% block body %}
+
+  <div class="row">
+    <div class="col-lg-4 col-sm-12">
+      <div class="card text-white my-3" style="max-width: 18rem;">
+        <div class="card-header bg-success">Log gegevens</div>
+        <div class="card-body">
+          <p class="card-text"><b>Ordernummer</b>: {{ order.id }}</p>
+          <p class="card-text"><b>Datum</b>: {{ order.verkoopDatum|date("d-m-Y") }}</p>
+          <p class="card-text"><b>Marktplaats acc.</b>: {{ order.marktplaatsaccount }}</p>
+          <p class="card-text"><b>Verzendkosten</b>:  € {{ order.verzendkosten|number_format(2,',','.') }}</p>
+          <p class="card-text"><b>Betaalmethode</b>:<br> {{ order.betaalmethode }}</p>
+          <p class="card-text"><b>Betaald</b>: {% if order.betaald == 1 %} Ja {% else %}
+              <a class="btn btn-sm btn-warning" href="{{ path('logontvangen', {'id': order.id}) }}">Betaling ontvangen</a> {% endif %}
+          </p>
+          <p class="card-text"><b>Verzonden</b>: {% if order.verzonden == 1 %} Ja {% else %}
+              <a href="{{ path('logVerzenden', {'id': order.id}) }}" class="btn btn-sm btn-warning">Verzonden</a> {% endif %}
+          </p>
+          {% if order.verzonden == 1 %}
+          <p class="card-text"><b>Verwachte leverdatum</b>:<br> {{ order.verwachteLeverdatum|date("d-m-Y") }}</p>
+          {% endif %}
+          <p class="card-text"><b>Verkocht</b>: {% if order.verkocht == 1 %} Ja {% else %} Nee {% endif %}</p>
+          {% if order.extraInfo != null %}
+          <p class="card-tex"><b>Extra info</b>: <br>{{ order.extraInfo }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12">
+      <div class="card text-white my-3" style="max-width: 18rem;">
+        <div class="card-header bg-success">Product(en)</div>
+        <div class="card-body">
+          {% for key,orderProduct in ordersProducts %}
+            <h5 class="card-title text-success"><b>Product {{ key + 1 }}</b>:</h5>
+            <p class="card-text"><b>Categorie</b>:<br> {{ orderProduct.product.categorie }}</p>
+            <p class="card-text"><b>Naam</b>:<br> {{ orderProduct.product.productnaam }}</p>
+            <p class="card-text"><b>Aantal</b>: {{ orderProduct.aantal }}</p>
+          {% endfor %}
+          <hr>
+          <h5 class="card-title text-success">Totaal gewicht: </h5>
+          <p class="card-text">{{ order.totaalgewicht }} gram</p>
+          <h5 class="card-title text-success">Totale verkoopprijs: </h5>
+          <p class="card-text"><strong>€ {{ order.verkoopprijs|number_format(2, ',', '.') }}</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12">
+      <div class="card text-white my-3" style="max-width: 18rem;">
+        <div class="card-header bg-success">Verzendgegevens</div>
+        <div class="card-body">
+          <p class="card-text"><b>Naam ontvanger</b>:<br> {{ order.koper }}</p>
+          <p class="card-text"><b>Adres</b>:<br> {{ order.adres }}</p>
+          <p class="card-text"><b>Postcode</b>:<br> {{ order.postcode }}</p>
+          <p class="card-text"><b>Stad</b>:<br> {{ order.stad }}</p>
+          <hr>
+          <p class="card-text"><b>Aantal postzegels</b>: {{ order.postzegels }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a class="btn btn-danger btn-sm mb-5" href="{{ path('log') }}"><i class="fas fa-arrow-left"></i> Terug</a>
+{% endblock %}
