@@ -29,9 +29,9 @@ class KlantenbestellingenController extends Controller {
   }
 
   /**
-   * @Route("/klantenbestellingen/{id}", name="klantenbestellingen_info")
+   * @Route("/klantenbestellingen/{id}", name="klantenbestellingen_show")
    */
-  public function showOrderDetail($id) {
+  public function klantenbestellingenShow($id) {
     $em = $this->getDoctrine()->getManager();
 
     $klantenbestelling = $em->getRepository(Klantenbestelling::class)->find($id);
@@ -42,10 +42,52 @@ class KlantenbestellingenController extends Controller {
 
     $klantenbestellingArtikelen = $em->getRepository(KlantenbestellingArtikel::class)->findBy(['klantenbestelling' => $klantenbestelling]);
 
-    return $this->render('klantenbestellingen/info.html.twig', [
+    return $this->render('klantenbestellingen/show.html.twig', [
         'klantenbestelling' => $klantenbestelling,
         'klantenbestellingArtikelen' => $klantenbestellingArtikelen,
     ]);
+  }
+
+  /**
+   * @Route("/klantenbestellingen/{id}/verzonden", name="klantenbestellingen_verzonden")
+   */
+  public function klantenbestellingSetVerzonden($id) {
+    $em = $this->getDoctrine()->getManager();
+
+    $klantenbestelling = $em->getRepository(Klantenbestelling::class)->find($id);
+
+    if (!$klantenbestelling) {
+      return $this->redirectToRoute('klantenbestellingen_index');
+    }
+
+    $klantenbestelling->setVerzonden(true);
+
+    $em->persist($klantenbestelling);
+    $em->flush();
+
+    $this->addFlash('success', "Klantenbestelling 'verzonden' succesvol aangepast!");
+    return $this->redirectToRoute('klantenbestellingen_show', ['id' => $id]);
+  }
+
+  /**
+   * @Route("/klantenbestellingen/{id}/betaald", name="klantenbestellingen_betaald")
+   */
+  public function klantenbestellingSetBetaald($id) {
+    $em = $this->getDoctrine()->getManager();
+
+    $klantenbestelling = $em->getRepository(Klantenbestelling::class)->find($id);
+
+    if (!$klantenbestelling) {
+      return $this->redirectToRoute('klantenbestellingen_index');
+    }
+
+    $klantenbestelling->setBetaald(true);
+
+    $em->persist($klantenbestelling);
+    $em->flush();
+
+    $this->addFlash('success', "Klantenbestelling 'betaald' succesvol aangepast!");
+    return $this->redirectToRoute('klantenbestellingen_show', ['id' => $id]);
   }
 
 }

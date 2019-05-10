@@ -163,7 +163,7 @@ class VoorraadController extends Controller {
       if (!$errorMessage) {
         $em->flush();
 
-        $this->addFlash('success', "Order succesvol aangemaakt!");
+        $this->addFlash('success', "Klantenbestelling succesvol aangemaakt!");
         $orderID = $klantenbestelling->getId();
         return $this->redirectToRoute('klantenbestellingen_info', array('id' => $orderID));
       } else {

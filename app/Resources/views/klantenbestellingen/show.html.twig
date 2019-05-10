@@ -39,7 +39,7 @@
           <div class="col-lg-3"><strong>Betaald:</strong></div>
           <div class="col-lg-9">
             {% if klantenbestelling.betaald == 1 %} Ja {% else %}
-              <a href="" class="btn btn-sm btn-light">Betaling ontvangen</a> {% endif %}
+              <a href="{{ path('klantenbestellingen_betaald', {'id': klantenbestelling.id}) }}" class="btn btn-sm btn-light">Betaling ontvangen</a> {% endif %}
           </div>
         </div>
 
@@ -47,7 +47,7 @@
           <div class="col-lg-3"><strong>Verzonden:</strong></div>
           <div class="col-lg-9">
             {% if klantenbestelling.verzonden == 1 %} Ja {% else %}
-              <a href="" class="btn btn-sm btn-light">Verzonden</a> {% endif %}
+              <a href="{{ path('klantenbestellingen_verzonden', {'id': klantenbestelling.id}) }}" class="btn btn-sm btn-light">Verzonden</a> {% endif %}
           </div>
         </div>
 

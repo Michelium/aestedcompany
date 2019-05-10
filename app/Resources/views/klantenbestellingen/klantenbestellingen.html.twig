@@ -33,7 +33,7 @@
             <th style="width: 7%">Verkoopprijs</th>
             <th style="width: 7%">Marktplaats acc.</th>
             <th style="width: 1%">Verzonden</th>
-            <th style="width: 1%">Paid</th>
+            <th style="width: 1%">Betaald</th>
             <th style="width: 1%">Sold</th>
             <th style="width: 2%">Acties</th>
           </tr>
@@ -50,7 +50,7 @@
               <td>{% if klantenbestelling.betaald == 1 %} <i class="fas fa-check text-success"></i> {% else %} <i class="fas fa-times text-danger"></i> {% endif %}</td>
               <td>{% if klantenbestelling.verkocht == 1 %} <i class="fas fa-check text-success"></i> {% else %} <i class="fas fa-times text-danger"></i> {% endif %}</td>
               <td>
-                <a class="btn btn-primary btn-sm mr-2" href="{{ path('klantenbestellingen_info', {'id': klantenbestelling.id}) }}"><i
+                <a class="btn btn-primary btn-sm mr-2" href="{{ path('klantenbestellingen_show', {'id': klantenbestelling.id}) }}"><i
                           class="fas fa-info"></i>&nbsp;Info</a>
               </td>
 
