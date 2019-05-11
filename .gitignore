@@ -1,4 +1,5 @@
 .idea
+.idea/*
 /build/
 /bin/phpunit
 /phpunit.xml
@@ -14,8 +15,8 @@
 !var/sessions/.gitkeep
 /vendor/
 /web/bundles/
-app/config/config.yml
-app/config/parameters.yml
+/app/config/config.yml
+/app/config/parameters.yml
 /logs
 /stats
 composer.phar
