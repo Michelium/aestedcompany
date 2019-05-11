@@ -17,3 +17,5 @@
 app/config/config.yml
 /logs
 /stats
+composer.phar
+private_html/
