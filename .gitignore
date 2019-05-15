@@ -17,6 +17,7 @@
 /web/bundles/
 /app/config/config.yml
 /app/config/parameters.yml
+app/config/parameters.yml
 /logs
 /stats
 composer.phar
