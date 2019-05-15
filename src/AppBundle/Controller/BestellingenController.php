@@ -3,22 +3,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Bestelling;
-use AppBundle\Entity\Product;
 use AppBundle\Form\BestellingBezorgType;
 use AppBundle\Form\BestellingType;
-use AppBundle\Form\ShishaBestellingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\PercentType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-//use Doctrine\ORM\EntityRepository;
-
-class BestellingController extends Controller {
+class BestellingenController extends Controller {
 
   /**
    * @Route("/bestellingen/openstaand", name="bestellingen_openstaandIndex")

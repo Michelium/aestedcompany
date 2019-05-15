@@ -9,4 +9,5 @@ parameters:
     mailer_host: mail.aested.nl
     mailer_user: support@aested.nl
     mailer_password: support
+    mailer_port: 587
     secret: ThisTokenIsNotSoSecretChangeIt

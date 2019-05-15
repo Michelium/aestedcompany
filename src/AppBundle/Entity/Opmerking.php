@@ -1,18 +1,19 @@
 <?php
 
+
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="klacht")
+ * @ORM\Table(name="opmerking")
  */
-class Klacht {
+class Opmerking {
 
   public function __construct() {
-    $this->datumingediend = new \DateTime();
+    $this->datum = new \DateTime();
   }
 
   /**
@@ -25,7 +26,7 @@ class Klacht {
    * @ORM\Column(type="string")
    * @Assert\NotBlank(message="Dit veld kan niet leeg zijn!")
    */
-  private $klachtText;
+  private $opmerking;
   /**
    * @ORM\Column(type="boolean")
    */
@@ -33,25 +34,11 @@ class Klacht {
   /**
    * @ORM\Column(type="date")
    */
-  private $datumingediend;
+  private $datum;
   /**
    * @ORM\Column(type="date", nullable=true)
    */
   private $datumvoltooid = null;
-
-  /**
-   * @return mixed
-   */
-  public function getKlachtText() {
-    return $this->klachtText;
-  }
-
-  /**
-   * @param mixed $klachtText
-   */
-  public function setKlachtText($klachtText) {
-    $this->klachtText = $klachtText;
-  }
 
   /**
    * @return mixed
@@ -63,8 +50,22 @@ class Klacht {
   /**
    * @param mixed $id
    */
-  public function setId($id) {
+  public function setId($id): void {
     $this->id = $id;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getOpmerking() {
+    return $this->opmerking;
+  }
+
+  /**
+   * @param mixed $opmerking
+   */
+  public function setOpmerking($opmerking): void {
+    $this->opmerking = $opmerking;
   }
 
   /**
@@ -77,22 +78,22 @@ class Klacht {
   /**
    * @param mixed $voltooid
    */
-  public function setVoltooid($voltooid) {
+  public function setVoltooid($voltooid): void {
     $this->voltooid = $voltooid;
   }
 
   /**
    * @return mixed
    */
-  public function getDatumingediend() {
-    return $this->datumingediend;
+  public function getDatum() {
+    return $this->datum;
   }
 
   /**
-   * @param mixed $datumingediend
+   * @param mixed $datum
    */
-  public function setDatumingediend($datumingediend) {
-    $this->datumingediend = $datumingediend;
+  public function setDatum($datum): void {
+    $this->datum = $datum;
   }
 
   /**
@@ -105,7 +106,7 @@ class Klacht {
   /**
    * @param mixed $datumvoltooid
    */
-  public function setDatumvoltooid($datumvoltooid) {
+  public function setDatumvoltooid($datumvoltooid): void {
     $this->datumvoltooid = $datumvoltooid;
   }
 
