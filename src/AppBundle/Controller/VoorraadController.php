@@ -121,7 +121,7 @@ class VoorraadController extends Controller {
           $postzegelAantal = 4;
         }
         # Postzegels ophalen uit database en van voorraad afschrijven
-        $postzegels = $em->getRepository(Artikel::class)->find(78);
+        $postzegels = $em->getRepository(Artikel::class)->find(1);
         if ($postzegelAantal <= $postzegels->getVoorraad()) {
           $postzegels->setVoorraad($postzegels->getVoorraad() - $postzegelAantal);
           $em->persist($postzegels);
@@ -165,7 +165,7 @@ class VoorraadController extends Controller {
 
         $this->addFlash('success', "Klantenbestelling succesvol aangemaakt!");
         $orderID = $klantenbestelling->getId();
-        return $this->redirectToRoute('klantenbestellingen_info', array('id' => $orderID));
+        return $this->redirectToRoute('klantenbestellingen_show', array('id' => $orderID));
       } else {
         $this->addFlash('danger', $errorMessage);
       }

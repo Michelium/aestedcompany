@@ -21,13 +21,11 @@
           <li class="nav-item dropdown d-sm-block d-md-none">
             <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
-              Menu
+              Artikelen
             </a>
             <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-              <a class="dropdown-item" href="#">Dashboard</a>
-              <a class="dropdown-item" href="#">Profile</a>
-              <a class="dropdown-item" href="#">Tasks</a>
-              <a class="dropdown-item" href="#">Etc ...</a>
+              <a class="dropdown-item" href="{{ path('artikelen_artikelenIndex') }}">Artikelen</a>
+              <a class="dropdown-item" href="{{ path('artikelen_categorienIndex') }}">Categoriën</a>
             </div>
           </li>
 
@@ -109,7 +107,7 @@
               <span class="menu-collapsed">Bezorgd</span>
             </a>
           </div>
-          <a href="#" class="bg-dark list-group-item list-group-item-action">
+          <a href="{{ path('afzet_index') }}" class="bg-dark list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-start align-items-center">
               <span class="fa fa-file-invoice-dollar fa-fw mr-3"></span>
               <span class="menu-collapsed">Afzet</span>
@@ -121,7 +119,7 @@
               <span class="menu-collapsed">Klantenbestellingen</span>
             </div>
           </a>
-          <a href="#" class="bg-dark list-group-item list-group-item-action">
+          <a href="{{ path('financien_index') }}" class="bg-dark list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-start align-items-center">
               <span class="fa fa-euro-sign fa-fw mr-3"></span>
               <span class="menu-collapsed">Financiën</span>
