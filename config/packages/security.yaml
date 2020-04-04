@@ -1,0 +1,62 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        our_db_provider:
+            entity:
+                class: App:User
+                property: username
+        in_memory:
+            memory: ~
+
+    firewalls:
+        dev:
+            pattern: ^/
+            security: false
+
+        main:
+            anonymous: ~
+            # activate different ways to authenticate
+
+            pattern:    ^/
+            provider: our_db_provider
+            form_login:
+                login_path: login
+                check_path: login
+
+            logout:
+                path: /logout
+                target: /
+
+            logout_on_user_change: true
+
+
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+    access_control:
+#        - { path: ^/home, roles: [ROLE_SUPER_ADMIN, ROLE_ADMIN, ROLE_USER, ROLE_SHISHA]}
+#        - { path: ^/togglemode, roles: [ROLE_SUPER_ADMIN, ROLE_ADMIN, ROLE_USER]}
+#        - { path: ^/artikelen, roles: [ROLE_SUPER_ADMIN, ROLE_ADMIN, ROLE_USER, ROLE_SHISHA]}
+#        - { path: ^/artikelen/categorien, roles: [ROLE_SUPER_ADMIN, ROLE_ADMIN, ROLE_USER]}
+#        - { path: ^/voorraad, roles: ROLE_USER }
+#        - { path: ^/producten, roles: ROLE_USER }
+#        - { path: ^/bestellingen, roles: ROLE_USER }
+#        - { path: ^/afzetomzet, roles: ROLE_USER }
+#        - { path: ^/log, roles: ROLE_USER }
+#        - { path: ^/geldoverzicht, roles: ROLE_USER }
+#        - { path: ^/updates, roles: ROLE_USER }
+#        - { path: ^/productenupdate, roles: ROLE_USER }
+#        - { path: ^/productenadd, roles: ROLE_USER }
+#        # shishapennen
+#        - { path: ^/shisha/voorraad, roles: ROLE_SHISHA_USER }
+#        - { path: ^/shisha/afzetomzet, roles: ROLE_SHISHA_ADMIN }
+#        - { path: ^/shisha/bestellingen, roles: ROLE_SHISHA_ADMIN }
+#        - { path: ^/shisha/artikelen, roles: ROLE_SHISHA_ADMIN }
+#        - { path: ^/shisha/orders, roles: ROLE_SHISHA_ADMIN }
+#        - { path: ^/shisha/detail, roles: ROLE_SHISHA_USER }
