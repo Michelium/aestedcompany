@@ -14,7 +14,7 @@ class OpmerkingenController extends Controller {
   /**
    * @Route("/opmerkingen", name="opmerkingen_index")
    */
-  public function opmerkingenIndex(Request $request, \Swift_Mailer $mailer) {
+  public function opmerkingenIndex(Request $request) {
     $em = $this->getDoctrine()->getManager();
 
     $opmerkingen = $em->getRepository(Opmerking::class)->findBy(['voltooid' => false]);
@@ -33,19 +33,19 @@ class OpmerkingenController extends Controller {
 
       $this->addFlash('success', 'Opmerking succesvol verzonden!');
 
-      $message = (new \Swift_Message('Aested Company | Nieuwe klacht'))
-          ->setFrom('support@aested.nl')
-          ->setTo('michelhamelink@gmail.com')
-          ->setBody(
-              $this->renderView(
-                  'emails/opmerking.html.twig',
-                  ['opmerking' => $opmerking]
-              ),
-              'text/html'
-          )
-      ;
-
-      $mailer->send($message);
+//      $message = (new \Swift_Message('Aested Company | Nieuwe klacht'))
+//          ->setFrom('support@aested.nl')
+//          ->setTo('michelhamelink@gmail.com')
+//          ->setBody(
+//              $this->renderView(
+//                  'emails/opmerking.html.twig',
+//                  ['opmerking' => $opmerking]
+//              ),
+//              'text/html'
+//          )
+//      ;
+//
+//      $mailer->send($message);
 
       return $this->redirectToRoute('opmerkingen_index');
     }

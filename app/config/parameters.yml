@@ -7,7 +7,6 @@ parameters:
     database_password: null
     mailer_transport: smtp
     mailer_host: mail.aested.nl
-    mailer_port: 587
     mailer_user: support@aested.nl
     mailer_password: support
     secret: ThisTokenIsNotSoSecretChangeIt
