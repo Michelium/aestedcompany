@@ -7,7 +7,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-    image_directory: '%kernel.project_dir%/private_html/uploads/images'
+    image_directory: '%kernel.project_dir%/public/uploads/images'
 
 framework:
     #esi: ~

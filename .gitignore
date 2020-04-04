@@ -21,4 +21,5 @@ app/config/parameters.yml
 /logs
 /stats
 composer.phar
-private_html/
+public/
+app/config/parameters.yml'

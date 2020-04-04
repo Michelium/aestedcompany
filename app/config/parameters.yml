@@ -2,12 +2,12 @@
 parameters:
     database_host: 127.0.0.1
     database_port: 3306
-    database_name: aested
+    database_name: aestedcompany
     database_user: root
-    database_password: mysql
+    database_password: null
     mailer_transport: smtp
     mailer_host: mail.aested.nl
+    mailer_port: 587
     mailer_user: support@aested.nl
     mailer_password: support
-    mailer_port: 587
     secret: ThisTokenIsNotSoSecretChangeIt
